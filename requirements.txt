@@ -1,0 +1,11 @@
+# Reproducible baseline environment; Python 3.10+ required.
+numpy==1.26.4
+pandas==2.2.3
+opencv-python-headless==4.10.0.84
+scikit-learn==1.5.2
+lightgbm==4.5.0
+xgboost==2.1.2
+torch==2.5.1
+shap==0.46.0
+matplotlib==3.9.2
+PyYAML==6.0.2

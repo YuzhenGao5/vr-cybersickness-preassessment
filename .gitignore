@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Keep private, licensed, or large data out of Git by default.
+data/*
+!data/.gitkeep
+
+# Large model files are generated artifacts; keep configs and summary results trackable.
+*.pt
+*.pth
+*.ckpt
+*.joblib
+*.pkl
+*.parquet
