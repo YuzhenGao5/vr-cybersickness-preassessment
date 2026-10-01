@@ -39,14 +39,28 @@
 - 类别缺失导致指标不可计算时的处理：
 - 基线门控结果与决策（AUC < 0.60 停止并诊断；AUC ≥ 0.60 继续）：
 
+## 随机种子
+
+- 全局种子：42（Python `random`、NumPy、PyTorch、LightGBM；使用 XGBoost 时也设为 42）。
+
 ## 软件与执行
 
-- 骨架环境验证：Windows x64；官方用户级 Python 3.12.10；`requirements.txt` 安装成功；导入检查 10/10 通过；PyTorch 2.5.1+cpu。
-- OS／架构（正式复现环境）：
-- Python 版本（正式复现环境）：
-- 安装命令：`python -m pip install -r requirements.txt`
-- `requirements.txt` 校验结果或环境锁文件：
-- LaTeX 发行版／版本（若使用）：MiKTeX 25.12；`pdflatex` 4.23 已通过绝对路径验证。安装器已将用户级 MiKTeX bin 目录加入 PATH；当前 Codex 进程未刷新环境变量，新开终端后可直接调用 `pdflatex`。
+- 已验证环境：Windows x64；官方用户级 Python 3.12.10；`requirements.txt` 安装成功；导入检查 10/10 通过。
+- Python：3.12.10。
+- OpenCV：`opencv-python-headless` 4.10.0.84（`cv2` 4.10.0）。
+- scikit-learn：1.5.2。
+- LightGBM：4.5.0。
+- XGBoost：2.1.2。
+- PyTorch：2.5.1+cpu。
+- SHAP：0.46.0。
+- matplotlib：3.9.2。
+- pandas：2.2.3。
+- NumPy：1.26.4。
+- PyYAML：6.0.2。
+- CUDA：N/A（`torch.version.cuda` 为 `None`；CPU-only PyTorch 构建）。
+- 安装命令：`python -m pip install -r requirements.txt`。
+- `requirements.txt` 校验结果或环境锁文件：固定依赖导入检查通过；10/10。
+- LaTeX 发行版／版本（若使用）：MiKTeX 25.12；`pdflatex` 4.23 已通过绝对路径验证。安装器已将用户级 MiKTeX bin 目录加入 PATH；当前 Codex 进程未刷新环境变量，重启 Codex 后可直接调用 `pdflatex`。
 - 代码提交：
 - 完整执行命令：
 - 输出路径及文件校验值（如适用）：
