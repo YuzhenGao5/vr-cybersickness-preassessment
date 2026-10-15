@@ -8,8 +8,8 @@ jobs:
   lightweight-tests:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install lightweight test dependency
@@ -17,11 +17,4 @@ jobs:
       - name: Check public package boundaries and hashes
         run: python scripts/check_release_package.py
       - name: Run data-free source tests
-        shell: pwsh
-        run: |
-          python -m unittest `
-            scripts.test_unity_parser `
-            scripts.test_compile_scene_agent_contract `
-            scripts.test_generic_scene_agent_collision `
-            scripts.test_generic_scene_agent_interaction_lock `
-            scripts.test_scene_agent_terminal_acceptance -v
+        run: python scripts/run_source_checks.py

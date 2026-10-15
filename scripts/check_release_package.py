@@ -28,6 +28,7 @@ REQUIRED = {
     "LICENSES/Apache-2.0.txt",
     "demo/scene_agent_terminal.py",
     "demo/generic_scene_agent/GenericSceneAgentBrain.cs",
+    "scripts/run_source_checks.py",
     "demo/UnityNormalHmdAgentDemo/Assets/Resources/NormalHmdAgentModel.json",
     "models/normal_hmd_v4_metadata.json",
     "models/unity_decision_brain_v0_unity.json",
