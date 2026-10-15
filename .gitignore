@@ -29,6 +29,8 @@ features/**
 # aggregate release evidence is maintained separately in release/.
 results/**
 !results/.gitkeep
+!results/unity_semantic_fixture/
+!results/unity_semantic_fixture/**
 audit/**
 figures/**
 tmp/**

@@ -108,12 +108,13 @@ XR/网络插件和自定义玩法可能需要适配器。改变游戏状态的�
 
 ```text
 configs/      冻结配置、Prompt、schema 和 reviewed-binding 规则
-data/         原始数据位置（Git 排除）；只提交可公开的数据可用性审计和合成 parser fixture
+data/         原始数据位置（Git 排除）；只提交可公开的数据可用性审计和小型合成 Scene
 demo/         Terminal、通用 Agent bridge、Unity 源项目和构建脚本
 docs/         人类报告、AI 交接、数据与复现说明
 knowledge/    已核验的模型/数据语义说明
 models/       仅提交审查后的 metadata / Unity JSON；二进制 checkpoint 排除
 release/      脱敏、机器可读的发布验收摘要
+results/      默认 Git 排除；仅提交 data-free 测试所需的合成 semantic-parser fixture
 scripts/      解析、预处理、训练、导出、验证和测试代码
 ```
 

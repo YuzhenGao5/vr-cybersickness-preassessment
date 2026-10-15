@@ -1,0 +1,976 @@
+{
+  "schema_version": "1.1.0",
+  "analysis_scope": {
+    "backend": "rules",
+    "project_root": "C:\\Users\\gaoyu\\Documents\\ChatGPT\\晕动症AI\\vr-cybersickness-preassessment\\results\\unity_semantic_fixture",
+    "synthetic_input": true,
+    "files_received": [
+      {
+        "path": "Assets/Scenes/SemanticFixture.unity",
+        "kind": "scene",
+        "complete": true
+      },
+      {
+        "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+        "kind": "prefab",
+        "complete": true
+      },
+      {
+        "path": "Assets/Scripts/DoorButton.cs",
+        "kind": "script",
+        "complete": true
+      },
+      {
+        "path": "Assets/Scripts/ForcedMotionZone.cs",
+        "kind": "script",
+        "complete": true
+      },
+      {
+        "path": "Assets/Scripts/RotatingPlatform.cs",
+        "kind": "script",
+        "complete": true
+      },
+      {
+        "path": "ProjectSettings/ProjectSettings.asset",
+        "kind": "settings",
+        "complete": true
+      },
+      {
+        "path": "ProjectSettings/ProjectVersion.txt",
+        "kind": "settings",
+        "complete": true
+      }
+    ],
+    "missing_inputs": [],
+    "parse_warnings": [],
+    "limitations": [
+      "Rule backend infers semantics from serialized names, tags, components and resolvable scripts; it cannot observe runtime-created objects.",
+      "Static risk cues are hypotheses, not measured cybersickness outcomes or medical predictions.",
+      "Prefab instances and addressable/string-loaded assets may require runtime instrumentation for complete resolution."
+    ]
+  },
+  "project_type": {
+    "category": "game",
+    "subcategory": "horror",
+    "confidence": 0.85,
+    "reasoning": "用户指令包含“恐怖”; this is user context, not independently verified from assets.",
+    "source_refs": [
+      {
+        "path": "user_instruction",
+        "kind": "user_instruction",
+        "locator": "raw",
+        "observation": "用户指令包含“恐怖”"
+      }
+    ]
+  },
+  "objects": [
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1001",
+      "name": "XROrigin_PlayerSpawn",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "XROrigin_PlayerSpawn",
+      "type": "navigation",
+      "position": [
+        0.0,
+        1.6,
+        0.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": "name/component/script keyword: spawn",
+      "confidence": 0.72,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1001",
+          "observation": "GameObject 'XROrigin_PlayerSpawn'; active=True; components: Transform; tag: Player"
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1002",
+      "name": "DoorButton",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "DoorButton",
+      "type": "interactive",
+      "position": [
+        2.0,
+        1.0,
+        4.0
+      ],
+      "position_space": "world",
+      "interactable": true,
+      "function": "serialized interaction component or tag",
+      "confidence": 0.95,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1002",
+          "observation": "GameObject 'DoorButton'; active=True; components: Transform, BoxCollider, MonoBehaviour, DoorButton; tag: Interactable"
+        },
+        {
+          "path": "Assets/Scripts/DoorButton.cs",
+          "kind": "script",
+          "locator": "class=DoorButton",
+          "observation": "MonoBehaviour on fileID=1002 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1003",
+      "name": "FastCoasterZone",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "FastCoasterZone",
+      "type": "unknown",
+      "position": [
+        8.0,
+        0.0,
+        12.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": null,
+      "confidence": 0.2,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1003",
+          "observation": "GameObject 'FastCoasterZone'; active=True; components: Transform, BoxCollider, MonoBehaviour, ForcedMotionZone"
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=1003 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1004",
+      "name": "RotatingPlatform",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "RotatingPlatform",
+      "type": "unknown",
+      "position": [
+        -6.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": null,
+      "confidence": 0.2,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1004",
+          "observation": "GameObject 'RotatingPlatform'; active=True; components: Transform, BoxCollider, MonoBehaviour, RotatingPlatform"
+        },
+        {
+          "path": "Assets/Scripts/RotatingPlatform.cs",
+          "kind": "script",
+          "locator": "class=RotatingPlatform",
+          "observation": "MonoBehaviour on fileID=1004 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1005",
+      "name": "CliffEdge_DropZone",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "CliffEdge_DropZone",
+      "type": "hazard",
+      "position": [
+        14.0,
+        20.0,
+        25.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": "name/component/script keyword: cliff",
+      "confidence": 0.72,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1005",
+          "observation": "GameObject 'CliffEdge_DropZone'; active=True; components: Transform, BoxCollider"
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1006",
+      "name": "NarrowCorridor",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "NarrowCorridor",
+      "type": "unknown",
+      "position": [
+        0.0,
+        1.5,
+        18.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": null,
+      "confidence": 0.2,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1006",
+          "observation": "GameObject 'NarrowCorridor'; active=True; components: Transform, BoxCollider"
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1007",
+      "name": "DecorativeLamp",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "DecorativeLamp",
+      "type": "decoration",
+      "position": [
+        1.0,
+        2.5,
+        6.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": "name/component/script keyword: lamp",
+      "confidence": 0.72,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1007",
+          "observation": "GameObject 'DecorativeLamp'; active=True; components: Transform, Light"
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1008",
+      "name": "TeleportAnchor_Gallery",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "TeleportAnchor_Gallery",
+      "type": "navigation",
+      "position": [
+        -2.0,
+        0.0,
+        22.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": "name/component/script keyword: teleport",
+      "confidence": 0.72,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1008",
+          "observation": "GameObject 'TeleportAnchor_Gallery'; active=True; components: Transform, BoxCollider; tag: Teleport"
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1009",
+      "name": "DenseParticleStorm",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "DenseParticleStorm",
+      "type": "unknown",
+      "position": [
+        6.0,
+        2.0,
+        30.0
+      ],
+      "position_space": "world",
+      "interactable": null,
+      "function": null,
+      "confidence": 0.2,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1009",
+          "observation": "GameObject 'DenseParticleStorm'; active=True; components: Transform, ParticleSystem"
+        }
+      ]
+    },
+    {
+      "id": "Assets/Scenes/SemanticFixture.unity#fileID=1010",
+      "name": "Console_01",
+      "scene": "Assets/Scenes/SemanticFixture.unity",
+      "hierarchy_path": "DoorButton/Console_01",
+      "type": "interactive",
+      "position": [
+        3.0,
+        1.0,
+        5.0
+      ],
+      "position_space": "world",
+      "interactable": true,
+      "function": "name/component/script keyword: door",
+      "confidence": 0.72,
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1010",
+          "observation": "GameObject 'Console_01'; active=True; components: Transform, BoxCollider, MonoBehaviour, DoorButton"
+        },
+        {
+          "path": "Assets/Scripts/DoorButton.cs",
+          "kind": "script",
+          "locator": "class=DoorButton",
+          "observation": "MonoBehaviour on fileID=1010 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000",
+      "name": "HighSpeedElevator",
+      "scene": "Assets/Prefabs/HighSpeedElevator.prefab",
+      "hierarchy_path": "HighSpeedElevator",
+      "type": "interactive",
+      "position": [
+        20.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "prefab_local",
+      "interactable": true,
+      "function": "serialized interaction component or tag",
+      "confidence": 0.95,
+      "source_refs": [
+        {
+          "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+          "kind": "prefab",
+          "locator": "fileID=410000",
+          "observation": "GameObject 'HighSpeedElevator'; active=True; components: Transform, BoxCollider, MonoBehaviour, ForcedMotionZone; tag: Interactable"
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=410000 resolves to this script."
+        }
+      ]
+    }
+  ],
+  "interaction_points": [
+    {
+      "object_id": "Assets/Scenes/SemanticFixture.unity#fileID=1002",
+      "object_name": "DoorButton",
+      "interaction_type": "press",
+      "position": [
+        2.0,
+        1.0,
+        4.0
+      ],
+      "position_space": "world",
+      "confidence": 0.95,
+      "runtime_validation_required": [
+        "confirm the component is enabled in Play Mode",
+        "observe the supported affordance before issuing an interaction"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1002",
+          "observation": "GameObject 'DoorButton'; active=True; components: Transform, BoxCollider, MonoBehaviour, DoorButton; tag: Interactable"
+        },
+        {
+          "path": "Assets/Scripts/DoorButton.cs",
+          "kind": "script",
+          "locator": "class=DoorButton",
+          "observation": "MonoBehaviour on fileID=1002 resolves to this script."
+        }
+      ]
+    },
+    {
+      "object_id": "Assets/Scenes/SemanticFixture.unity#fileID=1010",
+      "object_name": "Console_01",
+      "interaction_type": "press",
+      "position": [
+        3.0,
+        1.0,
+        5.0
+      ],
+      "position_space": "world",
+      "confidence": 0.72,
+      "runtime_validation_required": [
+        "confirm the component is enabled in Play Mode",
+        "observe the supported affordance before issuing an interaction"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1010",
+          "observation": "GameObject 'Console_01'; active=True; components: Transform, BoxCollider, MonoBehaviour, DoorButton"
+        },
+        {
+          "path": "Assets/Scripts/DoorButton.cs",
+          "kind": "script",
+          "locator": "class=DoorButton",
+          "observation": "MonoBehaviour on fileID=1010 resolves to this script."
+        }
+      ]
+    },
+    {
+      "object_id": "Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000",
+      "object_name": "HighSpeedElevator",
+      "interaction_type": "unknown",
+      "position": [
+        20.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "prefab_local",
+      "confidence": 0.95,
+      "runtime_validation_required": [
+        "confirm the component is enabled in Play Mode",
+        "observe the supported affordance before issuing an interaction"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+          "kind": "prefab",
+          "locator": "fileID=410000",
+          "observation": "GameObject 'HighSpeedElevator'; active=True; components: Transform, BoxCollider, MonoBehaviour, ForcedMotionZone; tag: Interactable"
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=410000 resolves to this script."
+        }
+      ]
+    }
+  ],
+  "risk_zones": [
+    {
+      "id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1003:fast_motion",
+      "zone_name": "FastCoasterZone",
+      "object_ids": [
+        "Assets/Scenes/SemanticFixture.unity#fileID=1003"
+      ],
+      "risk_type": "fast_motion",
+      "position": [
+        8.0,
+        0.0,
+        12.0
+      ],
+      "position_space": "world",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.65,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'coaster' suggests a fast_motion candidate with serialized configuration (speedmeterspersecond=12, accelerationmeterspersecondsquared=8, rotatescamera=1); configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure world-space position over time",
+        "compute linear speed and acceleration with declared units"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1003",
+          "observation": "Static cue 'coaster' matched fast_motion; serialized configuration: speedmeterspersecond=12, accelerationmeterspersecondsquared=8, rotatescamera=1; actual runtime motion is unmeasured."
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=1003 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1003:high_rotation",
+      "zone_name": "FastCoasterZone",
+      "object_ids": [
+        "Assets/Scenes/SemanticFixture.unity#fileID=1003"
+      ],
+      "risk_type": "high_rotation",
+      "position": [
+        8.0,
+        0.0,
+        12.0
+      ],
+      "position_space": "world",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.55,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'rotate' suggests a high_rotation candidate with serialized configuration (speedmeterspersecond=12, accelerationmeterspersecondsquared=8, rotatescamera=1); configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure world-space rotation over time",
+        "compute angular speed and rotation axis"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1003",
+          "observation": "Static cue 'rotate' matched high_rotation; serialized configuration: speedmeterspersecond=12, accelerationmeterspersecondsquared=8, rotatescamera=1; actual runtime motion is unmeasured."
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=1003 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1004:high_rotation",
+      "zone_name": "RotatingPlatform",
+      "object_ids": [
+        "Assets/Scenes/SemanticFixture.unity#fileID=1004"
+      ],
+      "risk_type": "high_rotation",
+      "position": [
+        -6.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "world",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.55,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'rotate' suggests a high_rotation candidate with serialized configuration (angularspeeddegreespersecond=150); configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure world-space rotation over time",
+        "compute angular speed and rotation axis"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1004",
+          "observation": "Static cue 'rotate' matched high_rotation; serialized configuration: angularspeeddegreespersecond=150; actual runtime motion is unmeasured."
+        },
+        {
+          "path": "Assets/Scripts/RotatingPlatform.cs",
+          "kind": "script",
+          "locator": "class=RotatingPlatform",
+          "observation": "MonoBehaviour on fileID=1004 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1005:height_change",
+      "zone_name": "CliffEdge_DropZone",
+      "object_ids": [
+        "Assets/Scenes/SemanticFixture.unity#fileID=1005"
+      ],
+      "risk_type": "height_change",
+      "position": [
+        14.0,
+        20.0,
+        25.0
+      ],
+      "position_space": "world",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.65,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'cliff' suggests a height_change candidate; configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure camera trajectory height change and vertical speed"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1005",
+          "observation": "Static cue 'cliff' matched height_change; actual runtime motion is unmeasured."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1006:narrow_space",
+      "zone_name": "NarrowCorridor",
+      "object_ids": [
+        "Assets/Scenes/SemanticFixture.unity#fileID=1006"
+      ],
+      "risk_type": "narrow_space",
+      "position": [
+        0.0,
+        1.5,
+        18.0
+      ],
+      "position_space": "world",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.65,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'corridor' suggests a narrow_space candidate; configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure traversable width and agent camera clearance"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1006",
+          "observation": "Static cue 'corridor' matched narrow_space; actual runtime motion is unmeasured."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1009:high_complexity",
+      "zone_name": "DenseParticleStorm",
+      "object_ids": [
+        "Assets/Scenes/SemanticFixture.unity#fileID=1009"
+      ],
+      "risk_type": "high_complexity",
+      "position": [
+        6.0,
+        2.0,
+        30.0
+      ],
+      "position_space": "world",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.55,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'particlesystem' suggests a high_complexity candidate; configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "capture representative RGB/depth frames",
+        "measure rendered motion/complexity and frame timing"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Scenes/SemanticFixture.unity",
+          "kind": "scene",
+          "locator": "fileID=1009",
+          "observation": "Static cue 'particlesystem' matched high_complexity; actual runtime motion is unmeasured."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000:fast_motion",
+      "zone_name": "HighSpeedElevator",
+      "object_ids": [
+        "Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000"
+      ],
+      "risk_type": "fast_motion",
+      "position": [
+        20.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "prefab_local",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.65,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'highspeed' suggests a fast_motion candidate with serialized configuration (speedmeterspersecond=7, accelerationmeterspersecondsquared=5, rotatescamera=0); configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure world-space position over time",
+        "compute linear speed and acceleration with declared units"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+          "kind": "prefab",
+          "locator": "fileID=410000",
+          "observation": "Static cue 'highspeed' matched fast_motion; serialized configuration: speedmeterspersecond=7, accelerationmeterspersecondsquared=5, rotatescamera=0; actual runtime motion is unmeasured."
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=410000 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000:narrow_space",
+      "zone_name": "HighSpeedElevator",
+      "object_ids": [
+        "Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000"
+      ],
+      "risk_type": "narrow_space",
+      "position": [
+        20.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "prefab_local",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.65,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'elevator' suggests a narrow_space candidate with serialized configuration (speedmeterspersecond=7, accelerationmeterspersecondsquared=5, rotatescamera=0); configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure traversable width and agent camera clearance"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+          "kind": "prefab",
+          "locator": "fileID=410000",
+          "observation": "Static cue 'elevator' matched narrow_space; serialized configuration: speedmeterspersecond=7, accelerationmeterspersecondsquared=5, rotatescamera=0; actual runtime motion is unmeasured."
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=410000 resolves to this script."
+        }
+      ]
+    },
+    {
+      "id": "risk:Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000:height_change",
+      "zone_name": "HighSpeedElevator",
+      "object_ids": [
+        "Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000"
+      ],
+      "risk_type": "height_change",
+      "position": [
+        20.0,
+        0.0,
+        10.0
+      ],
+      "position_space": "prefab_local",
+      "radius": null,
+      "severity": "unknown",
+      "confidence": 0.65,
+      "evidence_strength": "unknown",
+      "reasoning": "Static cue 'elevator' suggests a height_change candidate with serialized configuration (speedmeterspersecond=7, accelerationmeterspersecondsquared=5, rotatescamera=0); configured values are not proof of runtime motion, and no calibrated severity threshold is available.",
+      "runtime_validation_required": [
+        "measure camera trajectory height change and vertical speed"
+      ],
+      "source_refs": [
+        {
+          "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+          "kind": "prefab",
+          "locator": "fileID=410000",
+          "observation": "Static cue 'elevator' matched height_change; serialized configuration: speedmeterspersecond=7, accelerationmeterspersecondsquared=5, rotatescamera=0; actual runtime motion is unmeasured."
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=410000 resolves to this script."
+        }
+      ]
+    }
+  ],
+  "exploration_priority": [
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1004:high_rotation",
+      "target_name": "RotatingPlatform",
+      "priority": 10,
+      "reason": "Static high_rotation candidate requires runtime validation; severity is unknown. Matched user focus.",
+      "objectives": [
+        "measure world-space rotation over time",
+        "compute angular speed and rotation axis"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1003:fast_motion",
+      "target_name": "FastCoasterZone",
+      "priority": 8,
+      "reason": "Static fast_motion candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure world-space position over time",
+        "compute linear speed and acceleration with declared units"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1003:high_rotation",
+      "target_name": "FastCoasterZone",
+      "priority": 8,
+      "reason": "Static high_rotation candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure world-space rotation over time",
+        "compute angular speed and rotation axis"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000:fast_motion",
+      "target_name": "HighSpeedElevator",
+      "priority": 8,
+      "reason": "Static fast_motion candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure world-space position over time",
+        "compute linear speed and acceleration with declared units"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID",
+        "resolve a current world-space pose before navigation"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1005:height_change",
+      "target_name": "CliffEdge_DropZone",
+      "priority": 7,
+      "reason": "Static height_change candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure camera trajectory height change and vertical speed"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000:height_change",
+      "target_name": "HighSpeedElevator",
+      "priority": 7,
+      "reason": "Static height_change candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure camera trajectory height change and vertical speed"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID",
+        "resolve a current world-space pose before navigation"
+      ]
+    },
+    {
+      "target_kind": "interaction_point",
+      "target_id": "Assets/Scenes/SemanticFixture.unity#fileID=1010",
+      "target_name": "Console_01",
+      "priority": 6,
+      "reason": "Interaction candidate can reveal state changes or additional motion conditions.",
+      "objectives": [
+        "confirm the component is enabled in Play Mode",
+        "observe the supported affordance before issuing an interaction"
+      ],
+      "prerequisites": [
+        "load the source scene or instantiate the prefab",
+        "resolve the object by stable ID"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1009:high_complexity",
+      "target_name": "DenseParticleStorm",
+      "priority": 6,
+      "reason": "Static high_complexity candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "capture representative RGB/depth frames",
+        "measure rendered motion/complexity and frame timing"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID"
+      ]
+    },
+    {
+      "target_kind": "interaction_point",
+      "target_id": "Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000",
+      "target_name": "HighSpeedElevator",
+      "priority": 6,
+      "reason": "Interaction candidate can reveal state changes or additional motion conditions.",
+      "objectives": [
+        "confirm the component is enabled in Play Mode",
+        "observe the supported affordance before issuing an interaction"
+      ],
+      "prerequisites": [
+        "load the source scene or instantiate the prefab",
+        "resolve the object by stable ID",
+        "resolve a current world-space pose before navigation"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Prefabs/HighSpeedElevator.prefab#fileID=410000:narrow_space",
+      "target_name": "HighSpeedElevator",
+      "priority": 6,
+      "reason": "Static narrow_space candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure traversable width and agent camera clearance"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID",
+        "resolve a current world-space pose before navigation"
+      ]
+    },
+    {
+      "target_kind": "risk_zone",
+      "target_id": "risk:Assets/Scenes/SemanticFixture.unity#fileID=1006:narrow_space",
+      "target_name": "NarrowCorridor",
+      "priority": 6,
+      "reason": "Static narrow_space candidate requires runtime validation; severity is unknown.",
+      "objectives": [
+        "measure traversable width and agent camera clearance"
+      ],
+      "prerequisites": [
+        "load the source scene or prefab instance",
+        "resolve the object by stable ID"
+      ]
+    }
+  ],
+  "user_instructions": {
+    "raw": [
+      "这是一个恐怖游戏",
+      "重点关注RotatingPlatform",
+      "忽略DoorButton"
+    ],
+    "focus_areas": [
+      "RotatingPlatform"
+    ],
+    "avoid_areas": [
+      "DoorButton"
+    ],
+    "notes": [],
+    "conflicts": []
+  },
+  "uncertainties": [
+    {
+      "field": "risk_zones[].severity",
+      "reason": "Only static candidate cues are available; no calibrated thresholds or runtime trajectories were supplied.",
+      "needed_evidence": "Measure camera/object motion, control input, FOV and rendered visual features during Play Mode, then apply a versioned rule or validated model.",
+      "source_refs": []
+    },
+    {
+      "field": "objects[].position",
+      "reason": "1 objects do not have a fully resolved scene-world position.",
+      "needed_evidence": "Resolve prefab instances and parent transforms in the loaded runtime scene.",
+      "source_refs": [
+        {
+          "path": "Assets/Prefabs/HighSpeedElevator.prefab",
+          "kind": "prefab",
+          "locator": "fileID=410000",
+          "observation": "GameObject 'HighSpeedElevator'; active=True; components: Transform, BoxCollider, MonoBehaviour, ForcedMotionZone; tag: Interactable"
+        },
+        {
+          "path": "Assets/Scripts/ForcedMotionZone.cs",
+          "kind": "script",
+          "locator": "class=ForcedMotionZone",
+          "observation": "MonoBehaviour on fileID=410000 resolves to this script."
+        }
+      ]
+    }
+  ]
+}

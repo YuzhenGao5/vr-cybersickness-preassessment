@@ -125,7 +125,7 @@ usable goals；按 scene 39/8/9 切分，采样 600k/120k/120k 动作记录。�
 ```text
 data/**                 # 除 data/cyre_status.md 和 data/test_scenes 合成 fixture
 features/**             # 可能含 participant/session IDs
-results/**              # 本地逐帧/逐事件/日志；仅 .gitkeep
+results/**              # 本地逐帧/逐事件/日志；仅 .gitkeep 和合成 unity_semantic_fixture
 audit/**                # 可能含 session 映射
 models/**/*.pth|pkl     # checkpoint 与未知再分发许可模型
 tmp/**

@@ -66,6 +66,8 @@ python -m unittest `
   scripts.test_scene_agent_terminal_acceptance -v
 ```
 
+这些测试只读取仓库内的 `results/unity_semantic_fixture` 合成项目；它不含真人、参与者或晕动测量数据。
+
 安装全部 Python 依赖后运行所有 test module：
 
 ```powershell

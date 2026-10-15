@@ -1,0 +1,327 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+# SYNTHETIC SEMANTIC-PARSER FIXTURE ONLY. Not participant or research data.
+--- !u!1 &1001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2001}
+  m_Layer: 0
+  m_Name: XROrigin_PlayerSpawn
+  m_TagString: Player
+  m_IsActive: 1
+--- !u!4 &2001
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!1 &1002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2002}
+  - component: {fileID: 3002}
+  - component: {fileID: 4002}
+  m_Layer: 0
+  m_Name: DoorButton
+  m_TagString: Interactable
+  m_IsActive: 1
+--- !u!4 &2002
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 1, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2010}
+  m_Father: {fileID: 0}
+--- !u!65 &3002
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1002}
+  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Size: {x: 0.3, y: 0.3, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1002}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: a1111111111111111111111111111111, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  interactionType: press
+  targetDoor: {fileID: 0}
+--- !u!1 &1003
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2003}
+  - component: {fileID: 3003}
+  - component: {fileID: 4003}
+  m_Layer: 0
+  m_Name: FastCoasterZone
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2003
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1003}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 0, z: 12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &3003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1003}
+  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Size: {x: 10, y: 3, z: 20}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &4003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1003}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: b2222222222222222222222222222222, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  speedMetersPerSecond: 12
+  accelerationMetersPerSecondSquared: 8
+  rotatesCamera: 1
+--- !u!1 &1004
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2004}
+  - component: {fileID: 3004}
+  - component: {fileID: 4004}
+  m_Layer: 0
+  m_Name: RotatingPlatform
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2004
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1004}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6, y: 0, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &3004
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1004}
+  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Size: {x: 4, y: 0.5, z: 4}
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &4004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1004}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: c3333333333333333333333333333333, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  angularSpeedDegreesPerSecond: 150
+--- !u!1 &1005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2005}
+  - component: {fileID: 3005}
+  m_Layer: 0
+  m_Name: CliffEdge_DropZone
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2005
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1005}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14, y: 20, z: 25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &3005
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1005}
+  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Size: {x: 8, y: 2, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2006}
+  - component: {fileID: 3006}
+  m_Layer: 0
+  m_Name: NarrowCorridor
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2006
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &3006
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1006}
+  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Size: {x: 2, y: 3, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2007}
+  - component: {fileID: 3007}
+  m_Layer: 0
+  m_Name: DecorativeLamp
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2007
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1007}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 2.5, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!108 &3007
+Light:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1007}
+  m_Enabled: 1
+  serializedVersion: 11
+  m_Type: 2
+  m_Intensity: 2
+  m_Range: 8
+--- !u!1 &1008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2008}
+  - component: {fileID: 3008}
+  m_Layer: 0
+  m_Name: TeleportAnchor_Gallery
+  m_TagString: Teleport
+  m_IsActive: 1
+--- !u!4 &2008
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1008}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 22}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!65 &3008
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1008}
+  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2009}
+  - component: {fileID: 3009}
+  m_Layer: 0
+  m_Name: DenseParticleStorm
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2009
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1009}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 2, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!198 &3009
+ParticleSystem:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1009}
+  m_Enabled: 1
+  serializedVersion: 8
+  EmissionModule:
+    enabled: 1
+    rateOverTime:
+      serializedVersion: 2
+      minMaxState: 0
+      scalar: 400
+      minScalar: 400
+      maxScalar: 400
+    rateOverTimeMultiplier: 1
+--- !u!1 &1010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_Component:
+  - component: {fileID: 2010}
+  - component: {fileID: 3010}
+  - component: {fileID: 4010}
+  m_Layer: 0
+  m_Name: Console_01
+  m_TagString: Untagged
+  m_IsActive: 1
+--- !u!4 &2010
+Transform:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2002}
+--- !u!65 &3010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1010}
+  m_Enabled: 1
+  m_IsTrigger: 0
+  m_Size: {x: 0.4, y: 0.4, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_GameObject: {fileID: 1010}
+  m_Enabled: 1
+  m_Script: {fileID: 11500000, guid: a1111111111111111111111111111111, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  interactionType: press
+  targetDoor: {fileID: 0}

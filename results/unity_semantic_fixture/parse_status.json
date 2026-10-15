@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-10-10T09:50:50.201446+00:00",
+  "status": "success",
+  "backend": "rules",
+  "schema_version": "1.1.0",
+  "schema_valid": true,
+  "output": "C:\\Users\\gaoyu\\Documents\\ChatGPT\\晕动症AI\\vr-cybersickness-preassessment\\results\\unity_semantic_fixture\\parse_result.json",
+  "file_count": 7,
+  "synthetic_input": true,
+  "output_written": true,
+  "preexisting_output_detected": true
+}

@@ -22,8 +22,8 @@ This is a research/authoring aid, not a medical device.
 6. This file again before making scientific claims
 
 `PROTOCOL.md` and `REPLICATION.md` are frozen historical research documents. They are useful provenance, but
-their early status language is superseded by the 2026-10-15 report. `results/` is local and ignored; do not
-assume it exists in a clone.
+their early status language is superseded by the 2026-10-15 report. `results/` is local and ignored except for
+`results/unity_semantic_fixture`, a deliberately synthetic, data-free parser/contract test fixture.
 
 ## Authoritative current facts
 

@@ -31,6 +31,8 @@ REQUIRED = {
     "demo/UnityNormalHmdAgentDemo/Assets/Resources/NormalHmdAgentModel.json",
     "models/normal_hmd_v4_metadata.json",
     "models/unity_decision_brain_v0_unity.json",
+    "results/unity_semantic_fixture/README.md",
+    "results/unity_semantic_fixture/parse_result.json",
 }
 
 BANNED_SUFFIXES = {
@@ -135,7 +137,10 @@ def main() -> int:
             "/.gitkeep"
         ):
             errors.append(f"research data/output directory is publishable: {posix}")
-        if posix.startswith("results/") and posix != "results/.gitkeep":
+        if posix.startswith("results/") and not (
+            posix == "results/.gitkeep"
+            or posix.startswith("results/unity_semantic_fixture/")
+        ):
             errors.append(f"local result is publishable instead of release summary: {posix}")
         if posix.startswith("models/") and posix not in {
             "models/.gitkeep",
