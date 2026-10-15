@@ -1,0 +1,13 @@
+# Minimal dependencies for the preparation/CPU-baseline scripts; no TSM included.
+# Versions below are the packages actually used for this local check.
+requests==2.34.2
+numpy==1.26.4
+pandas==2.2.3
+opencv-python-headless==4.10.0.84
+scipy==1.17.1
+PyYAML==6.0.2
+scikit-learn==1.5.2
+lightgbm==4.5.0
+shap==0.46.0
+matplotlib==3.9.2
+joblib==1.6.0

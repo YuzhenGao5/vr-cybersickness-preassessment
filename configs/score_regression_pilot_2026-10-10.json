@@ -1,0 +1,40 @@
+{
+  "name": "VR.net event-level score regression exploratory pilot",
+  "date": "2026-10-10",
+  "random_seed": 42,
+  "status": "fixed_before_this_run_metrics; exploratory_not_preregistered_research",
+  "frame_features": "features/vrnet_matrix_features_v6.csv",
+  "rating_events": "data/processed/vrnet_design_score_2026-10-10/score_events.csv",
+  "target": "modern MS_rating score_value unchanged",
+  "history_seconds": 60,
+  "history_interval": "[report_time-60s, report_time); strictly prior, no contemporaneous/future features",
+  "fov_rounding_degrees": 0.001,
+  "minimum_history_span_seconds": 15,
+  "minimum_graphics_rows": 20,
+  "maximum_final_graphics_age_seconds": 5,
+  "minimum_time_span_fraction": 0.75,
+  "maximum_derivative_interval_seconds": 1,
+  "camera_jump_displacement_source_units": 10,
+  "rotation_screen_degrees_per_second": 720,
+  "cleaning": "recompute camera speed and scalar-speed acceleration within monotone <=1s intervals and <=10 source-unit displacements; invalidate object speeds at camera coordinate discontinuities; negative/nonfinite motion -> missing; no metric-driven thresholds",
+  "feature_sets": {
+    "time_only": ["exposure_elapsed_seconds"],
+    "scene_candidates": ["fov_horizontal_equivalent_mean", "fov_vertical_equivalent_mean", "visible_object_count_median", "visible_object_count_p90", "object_speed_median", "object_speed_p90", "exposure_elapsed_seconds"],
+    "scene_plus_mixed_camera": ["fov_horizontal_equivalent_mean", "fov_vertical_equivalent_mean", "visible_object_count_median", "visible_object_count_p90", "object_speed_median", "object_speed_p90", "exposure_elapsed_seconds", "mixed_camera_speed_median", "mixed_camera_speed_p90", "mixed_camera_acceleration_median", "mixed_camera_acceleration_p90", "mixed_camera_rotation_rate_median", "mixed_camera_rotation_rate_p90"]
+  },
+  "preprocessing": "fixed log1p of nonnegative feature values; training-fold median imputation then VarianceThreshold(1e-10); Ridge training-fold StandardScaler; no test-game normalization; no IDs/raw timestamps/prior scores/interaction inputs",
+  "models": {
+    "ridge": {"alpha": 10.0},
+    "lightgbm": {"n_estimators": 100, "learning_rate": 0.05, "num_leaves": 7, "min_child_samples": 20, "reg_lambda": 1.0, "n_jobs": 2}
+  },
+  "comparators": ["training-fold mean", "training-fold median", "time-only Ridge and LightGBM"],
+  "evaluation": ["Leave-One-Game-Out", "Leave-One-Subject-Out using modern README filename convention"],
+  "metrics": ["pooled OOF MAE", "pooled OOF RMSE", "pooled OOF R2", "pooled OOF Spearman", "equal-game mean MAE", "equal-session mean MAE"],
+  "fit_weights": "inverse event count per training session, normalized to training mean weight=1",
+  "tuning": "none; all fixed model/feature variants reported; no select-and-retest claim",
+  "primary_model": "scene_candidates_lightgbm",
+  "label_policy": "one real rating event per sample; no carry-forward or future labels; native auto/manual excluded",
+  "inference": "raw continuous score prediction; no clipping/rebinning; out-of-observed-range outputs counted",
+  "limitations": ["runtime features not certified pure design settings", "symmetric-equivalent FOV may differ from asymmetric XR FOV", "position units not independently verified as metres", "visible renderer entries not total GameObject density", "object names are not stable instance IDs", "repeated ratings and overlapping histories not independent", "LOGO may overlap participants; LOSO may overlap games", "no calibration or intervention effectiveness established"],
+  "protocol_gate": "supplementary regression exploration; original classification AUC gate is not evaluated or passed"
+}

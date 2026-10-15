@@ -1,16 +1,98 @@
+# Python environments and caches
 .venv/
+.venv-normal-hmd/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# Keep private, licensed, or large data out of Git by default.
-data/*
+# Credentials and machine-local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+
+# Raw and processed participant data. Only the small synthetic parser fixtures
+# are public source artifacts.
+data/**
 !data/.gitkeep
+!data/cyre_status.md
+!data/test_scenes/
+!data/test_scenes/**
+features/**
 
-# Large model files are generated artifacts; keep configs and summary results trackable.
+# Experiment outputs may contain participant/session identifiers, absolute
+# paths, download URLs or credentials copied from third-party pages. Public,
+# aggregate release evidence is maintained separately in release/.
+results/**
+!results/.gitkeep
+audit/**
+figures/**
+tmp/**
+
+# Generated model binaries and research checkpoints. The two explicitly
+# unignored JSON files are the reviewed runtime metadata/export used by the
+# public source demo.
+models/**
+!models/normal_hmd_v4_metadata.json
+!models/unity_decision_brain_v0_unity.json
 *.pt
 *.pth
 *.ckpt
 *.joblib
 *.pkl
+*.pickle
 *.parquet
+*.onnx
+
+# Unity and IDE generated state, anywhere in the tree
+**/.vs/
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/UserSettings/
+**/MemoryCaptures/
+**/[Bb]uild/
+**/[Bb]uilds/
+*.csproj
+*.sln
+*.user
+
+# Isolated Unity staging projects and generated Players
+demo/UnityGenericSceneAgentProjects/
+demo/UnityExternalSceneAgentProjects/
+demo/GenericSceneAgentBuilds/
+demo/ExternalSceneAgentBuilds/
+demo/SceneAgentTerminalBuild/
+demo/UnityNormalHmdAgentDemoBuild*/
+demo/UnityRandomAgentDemoBuild*/
+demo/UnitySceneAwareAgentDemoBuild*/
+demo/AgentExplorationDemo.exe
+demo/AgentExplorationDemo.spec
+
+# Generated Python packages, archives and local release bundles
+dist/
+build/
+release-packages/
+*.spec
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Runtime logs and captures outside results/
+*.log
+*.pid
+*.dmp
+*.mp4
+*.avi
+*.mov
+
+# OS noise
+.DS_Store
+Thumbs.db
+Desktop.ini

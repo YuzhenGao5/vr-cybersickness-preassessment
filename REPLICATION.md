@@ -57,6 +57,8 @@
 - pandas：2.2.3。
 - NumPy：1.26.4。
 - PyYAML：6.0.2。
+- Pillow：12.3.0。
+- Transformers：4.57.6（用于可选本地单目深度估计）。
 - CUDA：N/A（`torch.version.cuda` 为 `None`；CPU-only PyTorch 构建）。
 - 安装命令：`python -m pip install -r requirements.txt`。
 - `requirements.txt` 校验结果或环境锁文件：固定依赖导入检查通过；10/10。
@@ -73,3 +75,13 @@
 - 相关检验效应量、p 值、置信区间及多重检验校正：
 - 失败、限制或未复现项：
 - 协议偏离记录：
+
+## 2026-10-03 全特征提取记录
+
+- 数据：本地 VR.net 11_2_Mars_Miners；5,180 行遥测、5,178 张 JPG、5,177 个相邻帧对；图像索引无缺失或多余文件。
+- 特征输出：27 个 30 秒窗口，分析图像最长边 320 px。只提取特征和规则条件，没有训练模型，也未计算 AUC/F1。
+- 可选深度依赖：Pillow 12.3.0、Transformers 4.57.6；本地 PyTorch 2.5.1+cpu，无 CUDA。
+- 深度 checkpoint：depth-anything/Depth-Anything-V2-Small-hf，Apache-2.0；model.safetensors 为 99,173,660 bytes；SHA-256：3152477CE0D8D6978D76B995120DE97CB5B928701FD0F817769F59E249A16B70。
+- 模型获取日期：2026-10-03。当前权重保存在临时目录，不随项目交付；可从 [官方模型卡](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf) 重新获取。特征脚本仅加载本地模型目录，不会自动下载。
+- 深度输出是逐帧缩放至 [0,1] 的相对深度，不能解释为米制值。权重只用于本地特征推理；未下载研究数据集。
+- 结果文件：results/mars_miners_full_extraction.md、features/mars_miners_full_features.csv、features/mars_miners_full_features_statistics.csv、results/risk_factor_detection_full_report.md。

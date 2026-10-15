@@ -1,0 +1,286 @@
+schema_version: "3.0"
+frozen: true
+frozen_at_utc: "2026-10-07T13:07:43Z"
+review_date_local: "2026-10-08"
+review_timezone: "Pacific/Auckland"
+review_report: "results/threshold_literature_review.md"
+purpose: "Prepare literature-audited clip risk-factor definitions; no training authorization is implied."
+label_source: "engine_supervised_candidate_factor"
+label_kind: "rule_generated_proxy"
+validated_cybersickness_outcome: false
+data_percentile: false
+unknown_value: "unknown"
+binary_values: [0, 1]
+allowed_statuses: [usable, needs_validation, unusable]
+generation_gate:
+  required_status: "usable"
+  require_enabled: true
+  require_finite_threshold_value: true
+  require_feature_units_verified: true
+  require_timestamp_alignment_verified: true
+  require_scope_match: true
+  failure_value: "unknown"
+clip:
+  duration_sec: 1.0
+  time_source: "timestamp"
+  interval_convention: "[start_time, end_time)"
+  inherit_session_labels: false
+  use_session_max_as_clip_label: false
+  insufficient_time_coverage_value: "unknown"
+  threshold_duration_validation_required: true
+  note: "One second is a processing unit, not a literature-validated sickness exposure duration."
+input_separation:
+  intended_model_input: "RGB video clips; optional depth/flow only after their provenance is frozen"
+  label_generation_input: "engine camera/object telemetry aligned to each clip"
+  allow_label_generating_numeric_features_as_model_input: false
+  allow_ms_rating_as_factor_label: false
+metric_constraints:
+  position_unit: "source_coordinate_unit"
+  position_to_metre_verified: false
+  rotation_unit: "degree"
+  per_frame_angle_cutoff_allowed: false
+  distinguish_artificial_camera_motion_from_tracked_head_motion: true
+  fov_convention_required: "horizontal/vertical; per-eye/combined; projection/internal/display"
+  object_identity_required: true
+  object_count_is_density: false
+  flow_resolution_and_frame_interval_required: true
+  local_fov_observation: "v6 fov_horizontal_mean is approximately 95.852 degrees and nearly invariant"
+
+labels:
+  - id: "fast_camera_rotation"
+    enabled: false
+    status: "needs_validation"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "degree/s"
+    threshold_source: null
+    operator: "greater_than"
+    metric: "artificial_camera_angular_speed"
+    aggregation: null
+    required_features: [timestamp, camera_orientation, camera_motion_provenance]
+    source:
+      - title: "Viewpoint Snapping to Reduce Cybersickness in Virtual Reality"
+        authors: "Farmani and Teather"
+        year: 2018
+        doi: "10.20380/GI2018.23"
+        url: "https://graphicsinterface.org/wp-content/uploads/gi2018-23.pdf"
+        access: "original_full_text"
+      - title: "The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow"
+        authors: "Kim and Park"
+        year: 2020
+        doi: "10.3390/app10217808"
+        url: "https://www.mdpi.com/2076-3417/10/21/7808"
+        access: "publisher_full_text_search_index"
+    evidence:
+      factor_support: "context_dependent"
+      threshold_support: "no_transferable_cutoff_verified"
+      transfer_to_vrnet: false
+      literature_observations:
+        - value: 25.0
+          unit: "degree/s"
+          meaning: "snap-turn activation value in a stationary yaw-navigation experiment"
+          accepted_as_threshold: false
+        - value: 13.0
+          unit: "degree/s"
+          meaning: "user candidate attributed to ACM 2023; original title/DOI not identified"
+          accepted_as_threshold: false
+        - value: 52.0
+          unit: "degree/s"
+          meaning: "user candidate attributed to ACM 2023; original title/DOI not identified"
+          accepted_as_threshold: false
+      limitations: ["25 degree/s is intervention-specific", "exposure/order confounding", "yaw-specific scope", "VR.net artificial camera versus head motion separation unverified", "one-second aggregation unvalidated"]
+
+  - id: "high_camera_acceleration"
+    enabled: false
+    status: "unusable"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "m/s^2"
+    threshold_source: null
+    operator: "greater_than"
+    metric: "artificial_camera_linear_acceleration"
+    aggregation: null
+    required_features: [timestamp, camera_position, position_to_metre_scale, camera_motion_provenance]
+    source:
+      - title: "The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow"
+        authors: "Kim and Park"
+        year: 2020
+        doi: "10.3390/app10217808"
+        url: "https://www.mdpi.com/2076-3417/10/21/7808"
+        access: "publisher_full_text_search_index"
+      - title: "Rotational and Translational Velocity and Acceleration Thresholds for the Onset of Cybersickness in Virtual Reality"
+        authors: "Terenzi and Zaal"
+        year: 2020
+        doi: "10.2514/6.2020-0171"
+        url: "https://ntrs.nasa.gov/citations/20200000787"
+        access: "institutional_original_paper_and_abstract"
+    evidence:
+      factor_support: "context_dependent_optic_flow_onset"
+      threshold_support: "no_transferable_camera_cutoff_verified"
+      transfer_to_vrnet: false
+      limitations: ["0.7 m/s^2 candidate not validated", "reported means concern controlled particle-field motion", "matrix position scale is not calibrated to metres", "teleport/load discontinuities require segmentation", "one-second aggregation unvalidated"]
+
+  - id: "multi_axis_rotation"
+    enabled: false
+    status: "needs_validation"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "active_axis_count"
+    threshold_source: null
+    operator: "greater_than_or_equal"
+    metric: "concurrent_artificial_rotation_axes"
+    aggregation: null
+    required_features: [timestamp, camera_orientation, camera_axis_convention, camera_motion_provenance]
+    source:
+      - title: "Combined pitch and roll and cybersickness in a virtual environment"
+        authors: "Bonato, Bubka and Palmisano"
+        year: 2009
+        doi: "10.3357/asem.2394.2009"
+        url: "https://pubmed.ncbi.nlm.nih.gov/19911517/"
+        access: "original_publisher_abstract_via_pubmed"
+      - title: "Axis rotation and visually induced motion sickness: the role of combined roll, pitch, and yaw motion"
+        authors: "Keshavarz and Hecht"
+        year: 2011
+        doi: "10.3357/asem.3078.2011"
+        url: "https://pubmed.ncbi.nlm.nih.gov/22097636/"
+        access: "original_publisher_abstract_via_pubmed"
+    evidence:
+      factor_support: "specific_single_vs_combined_axis_experiments"
+      threshold_support: "axis_activation_cutoff_not_verified"
+      transfer_to_vrnet: false
+      literature_observations:
+        - value: 2
+          unit: "axes"
+          meaning: "experimental dual-axis condition; not an operational axis-activity threshold"
+          accepted_as_threshold: false
+      limitations: ["5 degree/frame has no verified original support", "frame-based cutoffs vary with sampling rate", "two axes must be concurrent rather than accumulated separately", "Euler conventions and angle wrapping must be audited", "head motion must not be silently treated as artificial rotation"]
+
+  - id: "wide_fov"
+    enabled: false
+    status: "unusable"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "degree"
+    threshold_source: null
+    operator: "greater_than"
+    metric: "horizontal_internal_or_display_fov"
+    aggregation: null
+    required_features: [timestamp, fov_horizontal, fov_convention, hmd_display_metadata]
+    source:
+      - title: "Combating VR sickness through subtle dynamic field-of-view modification"
+        authors: "Fernandes and Feiner"
+        year: 2016
+        doi: "10.1109/3DUI.2016.7460053"
+        url: "https://www.cs.columbia.edu/2016/combating-vr-sickness/combating-vr-sickness.pdf"
+        access: "author_pdf_search_index; direct_fetch_size_limit"
+      - title: "Effects of field of view on presence, enjoyment, memory, and simulator sickness in a virtual environment"
+        authors: "Lin, Duh, Parker, Abi-Rached and Furness"
+        year: 2002
+        doi: "10.1109/VR.2002.996519"
+        url: "https://ieeexplore.ieee.org/document/996519"
+        access: "publisher_robot_check; bibliographic_index_found; no_original_full_text_verified"
+    evidence:
+      factor_support: "context_dependent_fov_interventions"
+      threshold_support: "no_universal_60_90_100_120_degree_boundary_verified"
+      transfer_to_vrnet: false
+      limitations: ["experimental FOV settings do not define a universal sickness threshold", "projection FOV is not necessarily perceived display FOV", "v6 horizontal FOV is nearly invariant", "cannot obtain positive/negative classes by a supported cutoff in current matrix"]
+
+  - id: "high_object_density"
+    enabled: false
+    status: "unusable"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "visible_objects_per_solid_angle"
+    threshold_source: null
+    operator: "greater_than"
+    metric: "visible_distinct_object_density"
+    aggregation: null
+    required_features: [timestamp, stable_visible_object_id, visible_solid_angle]
+    source:
+      - title: "The effect of visual motion stimulus characteristics on vection and visually induced motion sickness"
+        authors: "Keshavarz, Philipp-Muller, Hemmerich, Riecke and Campos"
+        year: 2019
+        doi: "10.1016/j.displa.2018.07.005"
+        url: "https://www.sciencedirect.com/science/article/pii/S0141938218301112"
+        access: "publisher_abstract_and_article_preview"
+    evidence:
+      factor_support: "mixed; vection_effect_does_not_establish_vims_effect"
+      threshold_support: "no_object_count_150_cutoff_verified"
+      transfer_to_vrnet: false
+      limitations: ["matrix entry count is not guaranteed distinct visible object count", "raw count is not density", "published density manipulation did not increase VIMS in the cited condition", "camera views and object naming can change measured counts"]
+
+  - id: "high_object_speed"
+    enabled: false
+    status: "unusable"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "m/s"
+    threshold_source: null
+    operator: "greater_than"
+    metric: "world_or_camera_relative_visible_object_speed"
+    aggregation: null
+    required_features: [timestamp, stable_object_id, object_position, position_to_metre_scale, velocity_reference_frame]
+    source:
+      - title: "The effect of visual motion stimulus characteristics on vection and visually induced motion sickness"
+        authors: "Keshavarz, Philipp-Muller, Hemmerich, Riecke and Campos"
+        year: 2019
+        doi: "10.1016/j.displa.2018.07.005"
+        url: "https://www.sciencedirect.com/science/article/pii/S0141938218301112"
+        access: "publisher_abstract_and_article_preview"
+    evidence:
+      factor_support: "insufficient_for_this_world_space_object_metric"
+      threshold_support: "no_object_speed_5_m_per_s_cutoff_verified"
+      transfer_to_vrnet: false
+      limitations: ["self-motion stimulus speed is not moving semantic object world-space speed", "matrix coordinate scale unverified", "stable identity and reference frame unverified", "peripheral screen motion and depth affect visual speed"]
+
+  - id: "high_optical_flow"
+    enabled: false
+    status: "needs_validation"
+    label_kind: "rule_generated_proxy"
+    threshold_value: null
+    threshold_unit: "calibrated_angular_motion_per_second"
+    threshold_source: null
+    operator: "greater_than"
+    metric: "calibrated_visual_flow"
+    aggregation: null
+    required_features: [timestamp, adjacent_rgb_frames, frame_interval_sec, render_resolution, projection_calibration, flow_metric_definition]
+    source:
+      - title: "The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow"
+        authors: "Kim and Park"
+        year: 2020
+        doi: "10.3390/app10217808"
+        url: "https://www.mdpi.com/2076-3417/10/21/7808"
+        access: "publisher_full_text_search_index"
+      - title: "Rotational and Translational Velocity and Acceleration Thresholds for the Onset of Cybersickness in Virtual Reality"
+        authors: "Terenzi and Zaal"
+        year: 2020
+        doi: "10.2514/6.2020-0171"
+        url: "https://ntrs.nasa.gov/citations/20200000787"
+        access: "institutional_original_paper_and_abstract"
+    evidence:
+      factor_support: "controlled_visual_motion_onset_experiments"
+      threshold_support: "no_transferable_farneback_magnitude_cutoff_verified"
+      transfer_to_vrnet: false
+      limitations: ["pixel/frame depends on resizing and temporal stride", "controlled particle-field OF is not generic dense-flow mean magnitude", "world velocity is not screen-space motion", "one-second clip does not reproduce reported exposure conditions"]
+
+excluded_candidate_thresholds:
+  - id: "oscillation_0_35_hz"
+    accepted_as_factor_threshold: false
+    value: 0.35
+    unit: "Hz"
+    reason: "Body/head-neck sway or inertial sinusoidal motion, not a universal VR video flow/rotation threshold."
+    source:
+      - doi: "10.1016/j.engappai.2026.114856"
+        url: "https://www.sciencedirect.com/science/article/pii/S0952197626011383"
+      - doi: "10.1016/j.apergo.2019.102889"
+        url: "https://pubmed.ncbi.nlm.nih.gov/31422261/"
+  - id: "ssq_severity_categories"
+    accepted_as_factor_threshold: false
+    value: null
+    unit: "SSQ_total_score"
+    reason: "Participant symptom outcome categories cannot become engine-motion feature cutoffs; primary numeric grading source not verified in accessible text."
+    source:
+      - doi: "10.1207/s15327108ijap0303_3"
+        url: "https://www.tandfonline.com/doi/abs/10.1207/s15327108ijap0303_3"
+      - doi: "10.1177/107118139704100292"
+        url: "https://journals.sagepub.com/doi/10.1177/107118139704100292"

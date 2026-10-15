@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "execute_automatically": false,
+  "source_url": "https://drive.google.com/drive/folders/1LLo4OE83Zeso8MkEXSvW9VrdjiqqlFRR",
+  "metadata_source": "results/pilot_plan.md; historical verified Drive metadata",
+  "max_zip_bytes": 5000000000,
+  "min_free_bytes": 50000000000,
+  "games": [
+    {"game_name": "Army_Men", "archive_name": "Army_Men.zip", "drive_file_id": "1xlbshfl-bFJRWSGQPWhU_s_JVeOWbNPN", "archive_size_bytes": 973639478,
+     "sessions": ["21_1_Army_Men", "24_1_Army_Men", "25_1_Army_Men", "26_1_Army_Men", "30_2_Army_Men"]},
+    {"game_name": "Pirate_Life", "archive_name": "Pirate_Life.zip", "drive_file_id": "1Dv5EDW68_qGgdytcorUy8jW1kUYazAix", "archive_size_bytes": 1290512257,
+     "sessions": ["104_1_Pirate_Life", "105_1_Pirate_Life", "106_1_Pirate_Life", "107_1_Pirate_Life", "108_2_Pirate_Life"]},
+    {"game_name": "City_Parkour", "archive_name": "City_Parkour.zip", "drive_file_id": "13UWpK1qF9VpNNFdBOzuxupapN1JiJkcE", "archive_size_bytes": 1210122333,
+     "sessions": ["147_2_City_Parkour", "149_1_City_Parkour", "151_2_City_Parkour", "153_2_City_Parkour", "154_2_City_Parkour"]}
+  ]
+}

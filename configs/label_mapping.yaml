@@ -1,0 +1,43 @@
+# 标签映射配置
+# 冻结日期：2026-10-01
+# 数据集：Mazed and Confused / VRWalking（路径 A）
+# 特征类型：路径依赖特征（POV imagery）
+# 分析单元：参与者级
+
+label_source: "SSQ_and_FMS"
+primary_label: "TS_p"
+secondary_label: "Overall_FMS"
+subscale_labels: ["n_p", "o_p", "d_p"]
+
+analysis_unit: "participant_level"
+n_participants: 32
+n_scenes: 1
+evaluation_protocol: "LOSO_only"
+leave_one_scene_out: false
+reason_no_loso_scene: "只有一个场景，无法留出场景"
+
+feature_source:
+  type: "path_dependent"
+  disclaimer: "POV imagery 反映参与者路径、头动方向、移动和暴露历史，不是独立场景表征。不得声称预暴露或独立于用户。"
+
+proxy_label:
+  enabled: false
+  disclaimer: "真实 SSQ/FMS 标签，非代理标签"
+
+low_medium_high_mapping:
+  method: "tertile"
+  thresholds:
+    low: null
+    medium: null
+    high: null
+  ordinal_encoding:
+    low: 0
+    medium: 1
+    high: 2
+  note: "阈值必须在查看测试折结果前，根据 TS_p 实际分布冻结，写入本文件后不得修改"
+
+missing_label_rule: "缺失标签不得推断为低风险；缺失样本按预先声明规则排除或单独报告"
+
+# 注：VRWalking 论文报告 39 人招募、36 人纳入分析。
+# 实际 CSV 有 32 行（见 results/csv_row_check.md）。
+# 差异原因待查，已在 data/README.md 记录。

@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "source_url": "https://drive.google.com/drive/folders/1LLo4OE83Zeso8MkEXSvW9VrdjiqqlFRR",
+  "metadata_source": "results/vrnet_zip_member_inventory.csv.gz and results/vrnet_sampled_sessions_v2.csv",
+  "max_zip_bytes": 5000000000,
+  "min_free_bytes": 50000000000,
+  "games": [
+    {
+      "game_name": "Army_Men",
+      "archive_name": "Army_Men.zip",
+      "drive_file_id": "1xlbshfl-bFJRWSGQPWhU_s_JVeOWbNPN",
+      "archive_size_bytes": 973639478,
+      "sessions": ["21_1_Army_Men", "24_1_Army_Men", "25_1_Army_Men", "26_1_Army_Men", "30_2_Army_Men"]
+    }
+  ]
+}

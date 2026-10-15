@@ -1,0 +1,69 @@
+version: '4.0'
+frozen: true
+frozen_at_utc: '2026-10-07T14:39:00.491170+00:00'
+based_on: arXiv:2306.03381v1
+scope: Current local VR.net / tested Unity feature conditions only
+frozen_date: '2026-10-08'
+note: Only source/unit/metric/scope/clip/support gates passed labels can be enabled
+feature_config_sha256: b1d95be99fdee2a9ddbb6b53ab691355518e4d4910b1737994320a51243c2aa7
+candidate_config_sha256: 4b98742f82b5c306a469d8ce081be1f9081f8933900602e4b3010b217467bd62
+labels: []
+unusable_labels:
+- id: fast_camera_speed
+  status: no_usable_threshold
+  attempts: 3
+  reasons:
+  - source_not_found
+  - unit_mismatch
+  label_value: unknown
+- id: high_camera_acceleration
+  status: no_usable_threshold
+  attempts: 4
+  reasons:
+  - source_not_found
+  - unit_mismatch
+  label_value: unknown
+- id: high_object_density
+  status: no_usable_threshold
+  attempts: 2
+  reasons:
+  - unit_mismatch
+  label_value: unknown
+- id: high_object_speed
+  status: no_usable_threshold
+  attempts: 1
+  reasons:
+  - source_not_found
+  label_value: unknown
+- id: high_optical_flow
+  status: no_usable_threshold
+  attempts: 1
+  reasons:
+  - numeric_threshold_not_found
+  label_value: unknown
+- id: multi_axis_rotation
+  status: no_usable_threshold
+  attempts: 3
+  reasons:
+  - numeric_threshold_not_found
+  - source_not_found
+  label_value: unknown
+- id: wide_fov
+  status: no_usable_threshold
+  attempts: 2
+  reasons:
+  - feature_not_usable
+  - source_not_found
+  label_value: unknown
+data_percentile_allowed: false
+unknown_handling: Missing or unsupported supervision stays unknown; never convert
+  to negative
+session_label_rule: Generate synchronized labels per time window; never copy session
+  labels
+distribution_screen:
+  minimum_positive: 5
+  maximum_positive: 56
+  minimum_negative: 5
+  maximum_negative: 56
+  cohort: v6 61 sessions
+  proves_cybersickness_validity: false

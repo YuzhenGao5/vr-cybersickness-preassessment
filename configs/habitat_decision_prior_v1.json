@@ -1,0 +1,71 @@
+{
+  "schema_version": "habitat-decision-prior-config-1.0",
+  "name": "habitat_decision_prior_v1",
+  "seed": 42,
+  "data": {
+    "source": "Habitat-Web ObjectNav THDA 70k",
+    "source_kind": "public_human",
+    "license": "CC BY-NC 4.0",
+    "data_root": "data/external/habitat-web/objectnav/objectnav_mp3d_thda_70k",
+    "prepared_dir": "data/derived/habitat-web/decision_prior_v1",
+    "content_glob": "train/content/*.json.gz",
+    "split_ratios": {
+      "train": 0.70,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "max_samples": {
+      "train": 600000,
+      "val": 120000,
+      "test": 120000
+    },
+    "history_run_clip": 10,
+    "sampling": "deterministic uniform reservoir within each scene-group split",
+    "goal_proxy": "nearest annotated ObjectNav goal view point (or goal position fallback) at the current state; deployment must supply an equivalent known semantic target waypoint",
+    "exclude_first_placeholder_stop": true,
+    "retain_final_stop": true
+  },
+  "model": {
+    "hidden_dims": [64, 64],
+    "dropout": 0.10
+  },
+  "training": {
+    "epochs": 30,
+    "batch_size": 2048,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "patience": 5,
+    "class_weight_min": 0.25,
+    "class_weight_max": 20.0,
+    "ece_bins": 15,
+    "num_workers": 0
+  },
+  "geometry_baseline": {
+    "stop_distance_m": 0.20,
+    "look_vertical_direction_threshold": 0.20,
+    "turn_direction_threshold": 0.18
+  },
+  "outputs": {
+    "checkpoint": "models/habitat_decision_prior_v1.pth",
+    "runtime_json": "models/habitat_decision_prior_v1.json",
+    "metrics": "results/habitat_decision_prior_v1_metrics.json",
+    "history": "results/habitat_decision_prior_v1_history.csv",
+    "metadata": "results/habitat_decision_prior_v1_metadata.json"
+  },
+  "claims": {
+    "scope": "six-action pose-and-goal-conditioned Habitat-Web navigation prior",
+    "observations": "pose, relative currently nearest annotated goal waypoint, and strictly previous actions only",
+    "visual_input": false,
+    "map_input": false,
+    "unity_scene_semantics": false,
+    "complete_unity_brain": false,
+    "human_like_general_claim_allowed": false,
+    "limitations": [
+      "No RGB, depth, semantic map, obstacle map, or Unity source-code representation is used.",
+      "Habitat goal annotations supply candidate waypoints; deployment must provide equivalent current semantic-target positions without consulting a future trajectory.",
+      "The model selects only MOVE_FORWARD, TURN_LEFT, TURN_RIGHT, LOOK_UP, LOOK_DOWN, or STOP.",
+      "It is not an interaction policy, path planner, collision controller, cybersickness predictor, or complete Unity Brain.",
+      "Performance on held-out Matterport scenes does not establish human-like general navigation in arbitrary Unity projects."
+    ]
+  }
+}

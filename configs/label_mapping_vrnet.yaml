@@ -1,0 +1,30 @@
+# Frozen before any model output is inspected. User-requested ordinal bins.
+version: "1.0"
+frozen: true
+random_seed: 42
+source_dataset: "VR.net Mars Miners (11_2)"
+source_label_column: "MS_rating"
+source_label_note: "保留源字段名；按本任务指定阈值映射，未声称与其它 FMS 量表等价。"
+window_seconds: 30
+timestamp_column: "timestamp"
+timestamp_unit: "milliseconds"
+frame_column: "frame"
+window_anchor: "first valid timestamp in the session"
+window_interval: "half-open [start_time, end_time)"
+window_assignment_policy: "assign the nearest non-empty MS_rating event to each 30-second window center; one event may be reused by multiple windows"
+window_assignment_warning: "descriptive alignment only; future-nearest events may be used and are not an online prediction target"
+classes:
+  low:
+    min_inclusive: null
+    max_inclusive: 2
+  medium:
+    min_inclusive: 3
+    max_inclusive: 5
+  high:
+    min_inclusive: 6
+    max_inclusive: null
+unmapped_numeric_values: "unknown"
+notes:
+  - "Intervals (2,3) and (5,6) are intentionally unmapped by the requested bins."
+  - "Do not tune these cutoffs after inspecting model or evaluation results."
+  - "Sparse-event correlations must deduplicate by source event; reusing one event across windows does not create independent labels."

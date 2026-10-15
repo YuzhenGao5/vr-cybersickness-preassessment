@@ -1,0 +1,274 @@
+{
+  "schemaVersion": "vr-cybersickness-research-snapshot-1.0",
+  "snapshotId": "research-prototype-2026-10-15",
+  "snapshotDate": "2026-10-15",
+  "projectPurpose": "Auditable design-time Unity VR exploration and evidence collection for future cybersickness risk assessment.",
+  "medicalDevice": false,
+  "currentEndToEndClaim": "Unity parsing, contract compilation, isolated build, scene-aware exploration, guarded interaction, telemetry and content-completion acceptance are integrated.",
+  "notYetIntegrated": [
+    "VR.net runtime risk classifier",
+    "calibrated personal cybersickness probability",
+    "causal design-parameter recommendations",
+    "cybersickness-prone participant motion generator",
+    "validated zero-adaptation support for arbitrary Unity projects"
+  ],
+  "unity": {
+    "validatedEditorVersion": "6000.2.9f1",
+    "canonicalBrain": {
+      "path": "demo/generic_scene_agent/GenericSceneAgentBrain.cs",
+      "sha256": "b070363b572e3fc70b3a52528923ed091e68ed496a0c0888c0b2af657d1a4196"
+    },
+    "completionPolicy": {
+      "success": "all grounded targets visited and all required interactions verified",
+      "minimumEvidenceSeconds": 15.0,
+      "noProgressTimeoutSeconds": 45.0,
+      "safetyTimeoutSeconds": 900.0,
+      "fixedSixtySecondSuccess": false
+    },
+    "collisionPolicy": "full-height-capsule-sweep+stable-side-steering+inertia-hard-stop",
+    "interactionPolicy": "0.35-second settle; BodyRoot XZ/yaw/ground lock through invoke and async verify; HeadLocal remains active; fail closed"
+  },
+  "models": {
+    "normalHmdV4": {
+      "role": "low-level root and HeadLocal motion prior",
+      "integrated": true,
+      "dataset": "EyeNavGS Rutgers + NTHU",
+      "participants": 46,
+      "scenes": 12,
+      "canonicalTrajectories": 552,
+      "validStereoPosePairs": 1931091,
+      "participantSplit": {
+        "train": 32,
+        "validation": 7,
+        "test": 7
+      },
+      "segments": {
+        "train": 25546,
+        "validation": 5927,
+        "test": 5592
+      },
+      "architecture": "independent_root_horizontal_vertical_lstm_holding_events",
+      "inputDimensions": 9,
+      "historySteps": 64,
+      "fixedDtSeconds": 0.027,
+      "hiddenDimensions": 96,
+      "parameters": 125689,
+      "epochs": 22,
+      "checkpointSha256": "ad667a54dca8072cda0c684c4e15047e279938b702cd6be1ff7806d7449bad5b",
+      "metadataPath": "models/normal_hmd_v4_metadata.json",
+      "runtimeExport": {
+        "path": "demo/UnityNormalHmdAgentDemo/Assets/Resources/NormalHmdAgentModel.json",
+        "bytes": 7878297,
+        "sha256": "0c5365759e7eefd47a0c810a3ec44c05015da9bc8fdf642f804251c74b62a0b4",
+        "containsProcessedEyeNavSeedWindows": true,
+        "seedWindowCount": 414,
+        "license": "Apache-2.0"
+      },
+      "predictiveMetrics": {
+        "horizontalOnsetAuRoc": 0.7137,
+        "verticalOnsetAuRoc": 0.6596,
+        "untouchedHoldoutClaimAllowed": false
+      },
+      "distributionAcceptance": {
+        "passed": false,
+        "horizontalOccupancy": 0.1464,
+        "verticalOccupancy": 0.1484
+      },
+      "smoothDeploymentAcceptance": {
+        "passed": true,
+        "linearJerkP95Before": 42.985,
+        "linearJerkP95After": 9.6436,
+        "yawJerkP95Before": 74.063,
+        "yawJerkP95After": 15.812
+      },
+      "humanDistributionEquivalenceClaimAllowed": false
+    },
+    "legacyEyeNavRandomAgent": {
+      "role": "historical predecessor retained for comparison; not the current Normal HMD runtime",
+      "integratedIntoCurrentGenericAgent": false,
+      "runtimeExport": {
+        "path": "demo/UnityRandomAgentDemo/Assets/Resources/EyeNavAgentModel.json",
+        "bytes": 1599039,
+        "sha256": "9e60c13be233b88c8ba6d65419f8939f419b198fa15f347b8f763feb9650817b",
+        "containsProcessedEyeNavSeedWindows": true,
+        "seedWindowCount": 504,
+        "trajectoryCount": 84,
+        "pseudonymousParticipantCount": 7,
+        "license": "Apache-2.0"
+      }
+    },
+    "unityDecisionBrainV0": {
+      "role": "candidate target ranking and six-macro-skill prediction",
+      "integrated": true,
+      "runtimeModes": [
+        "rule",
+        "shadow",
+        "model-research-with-explicit-override"
+      ],
+      "trainingContexts": 919,
+      "humanUnityDecisionSamples": 0,
+      "source": "rule_bootstrap",
+      "projects": 2,
+      "sceneGroups": 3,
+      "parameters": 28663,
+      "dataStatus": "smoke_only",
+      "humanLikeClaimAllowed": false,
+      "testMetrics": {
+        "targetTop1": 0.5568,
+        "targetTop3": 0.9205,
+        "mrr": 0.7453,
+        "ndcg": 0.8099,
+        "ruleUtilityTop1": 0.625,
+        "skillMacroF1": 0.6667,
+        "firstValidSkillBaselineAccuracy": 1.0
+      },
+      "runtimeExport": {
+        "path": "models/unity_decision_brain_v0_unity.json",
+        "bytes": 787617,
+        "sha256": "a5d5bb201098f84aff11644ec45f3e2b753715054b752e4648ad5fc5fdc039ea"
+      }
+    },
+    "habitatWebPrior": {
+      "role": "offline six-action public-human navigation prior",
+      "integratedIntoUnity": false,
+      "dataset": "Habitat-Web ObjectNav THDA 70k",
+      "license": "CC BY-NC 4.0",
+      "sceneSplit": [
+        39,
+        8,
+        9
+      ],
+      "episodesScanned": 70176,
+      "usableGoals": 60085,
+      "sampleSplit": [
+        600000,
+        120000,
+        120000
+      ],
+      "parameters": 6534,
+      "testAccuracy": 0.6825,
+      "testBalancedAccuracy": 0.5651,
+      "testMacroF1": 0.405,
+      "repeatPreviousAccuracy": 0.7205,
+      "productionModel": false
+    },
+    "vrnetClassifier": {
+      "role": "offline exploratory association between realized motion/head statistics and MS_rating > 2",
+      "integratedIntoUnity": false,
+      "model": "scene_head_multiscale LogisticRegression",
+      "games": 12,
+      "sessions": 86,
+      "participantIds": 69,
+      "ratingEvents": 1024,
+      "negativeEvents": 825,
+      "positiveEvents": 199,
+      "rawInputColumnsExpectedBySavedPipeline": 73,
+      "retainedFeatures": 55,
+      "leaveOneGameOut": {
+        "pooledOofAuc": 0.6819,
+        "meanFoldAuc": 0.6696,
+        "accuracy": 0.6553,
+        "macroF1": 0.5686
+      },
+      "gameAndParticipantHoldout": {
+        "pooledOofAuc": 0.6082,
+        "meanFoldAuc": 0.644,
+        "accuracy": 0.6563,
+        "macroF1": 0.5486
+      },
+      "nestedSelectedPooledAuc": 0.566,
+      "calibratedProbability": false,
+      "bestOfExplorationSelectionUncertainty": true,
+      "publishedModelBinary": false
+    }
+  },
+  "runtimeAcceptance": {
+    "ruleGarden": {
+      "status": "passed",
+      "completionReason": "content_complete",
+      "simulatedSeconds": 317.30401611328125,
+      "targetsVisited": 10,
+      "targetsDeclared": 10,
+      "collisionOverlaps": 0,
+      "policyAuthority": "rule"
+    },
+    "modelGarden": {
+      "status": "passed",
+      "completionReason": "content_complete",
+      "simulatedSeconds": 317.30401611328125,
+      "targetsVisited": 10,
+      "targetsDeclared": 10,
+      "collisionOverlaps": 0,
+      "policyAuthority": "model",
+      "modelDataStatus": "smoke_only",
+      "inferences": 40,
+      "fallbacks": 0,
+      "ruleDisagreements": 2,
+      "goldenSelfTestPassed": true,
+      "allLogitsFinite": true
+    },
+    "collisionPositive": {
+      "status": "passed",
+      "completionReason": "content_complete",
+      "simulatedSeconds": 77.895,
+      "targetsVisited": 4,
+      "targetsDeclared": 4,
+      "requiredInteractionsVerified": 1,
+      "avoidanceAdjustments": 471,
+      "overlapEpisodes": 0,
+      "rampsReachedDegrees": [
+        15,
+        30
+      ]
+    },
+    "collisionNegative": {
+      "expectedFailureObserved": true,
+      "forcedOverlapDuringInteractionLock": true,
+      "overlapEpisodes": 1,
+      "collisionSafetyPassed": false,
+      "playerExitCode": 3
+    },
+    "asyncInteractionPositive": {
+      "status": "passed",
+      "completionReason": "content_complete",
+      "simulatedSeconds": 34.53300094604492,
+      "requiredInteractionsVerified": 2,
+      "requiredInteractions": 2,
+      "bodyRootLockViolations": 0,
+      "headLocalActiveDuringLock": true,
+      "nextFrameWasDeferred": true,
+      "coroutineWasDeferred": true
+    },
+    "asyncInteractionNegative": {
+      "expectedFailureObserved": true,
+      "completionReason": "content_exhausted",
+      "simulatedSeconds": 8.666999816894531,
+      "requiredInteractionsVerified": 1,
+      "requiredInteractions": 2,
+      "failedMethodInvocationCount": 1,
+      "preexistingExpectedStateDidNotPass": true
+    }
+  },
+  "automatedChecks": {
+    "localPythonTestsPassed": 88,
+    "localPythonTestsFailed": 0,
+    "terminalSourceSelfTestPassed": true,
+    "terminalPackagedSelfTestPassed": true,
+    "firstPersonRenderValidationPassed": true,
+    "finalUnityBuildErrorCount": 0
+  },
+  "supersedes": {
+    "description": "An intermediate decision-brain handoff reported 59.994 seconds, 8/10 targets and 33 inferences.",
+    "current": "317.304 seconds, 10/10 targets and 40 inferences"
+  },
+  "publicationPolicy": {
+    "completeRawParticipantDatasetsPublished": false,
+    "vrnetParticipantOrEventFeatureTablesPublished": false,
+    "oofPredictionsPublished": false,
+    "unityBuildsOrExecutablesPublishedInGit": false,
+    "binaryCheckpointsPublished": false,
+    "processedEyeNavSeedWindowsPublished": true,
+    "eyeNavPseudonymousTrajectoryIdsPublishedInsideRuntimeExports": true,
+    "projectLevelLicenseDeclared": false
+  }
+}

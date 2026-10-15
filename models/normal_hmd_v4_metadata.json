@@ -1,0 +1,471 @@
+{
+  "schema_version": "4.0.0",
+  "generated_at_utc": "2026-10-11T14:23:12.554056+00:00",
+  "status": "success",
+  "smoke": false,
+  "device": "cuda",
+  "amp": true,
+  "parameter_count": 125689,
+  "epochs_completed": 22,
+  "best_val_loss": 1.295077653343126,
+  "test_loss": 1.5795564116998035,
+  "segments_used": {
+    "train": 25546,
+    "val": 5927,
+    "test": 5592
+  },
+  "trajectory_fragments": {
+    "train": 866,
+    "val": 159,
+    "test": 168
+  },
+  "prepared_split_sha256": {
+    "train": "31d41a76580cd65110fe66ced59952b05df04b215445b84738a51d71a70baedf",
+    "val": "5c19f5803d99ea8f34572472a10b8de68dd62ee459719813533e8eb762300a52",
+    "test": "e5727210c5c4e04a9e84a31bc2b8c8c50c21b041ad08496794b4a8c2d1e0d2fa"
+  },
+  "label_consistency": {
+    "train": {
+      "horizontal_physical_onsets": 9523,
+      "horizontal_duplicate_onset_groups": 6024,
+      "vertical_physical_onsets": 12203,
+      "vertical_duplicate_onset_groups": 7702
+    },
+    "val": {
+      "horizontal_physical_onsets": 1935,
+      "horizontal_duplicate_onset_groups": 1318,
+      "vertical_physical_onsets": 2663,
+      "vertical_duplicate_onset_groups": 1746
+    },
+    "test": {
+      "horizontal_physical_onsets": 2105,
+      "horizontal_duplicate_onset_groups": 1354,
+      "vertical_physical_onsets": 2830,
+      "vertical_duplicate_onset_groups": 1830
+    }
+  },
+  "event_summary": {
+    "train": {
+      "horizontal": {
+        "event_count": 10957,
+        "events_per_minute": 25.310274349791364,
+        "active_fraction": 0.5176712237634301,
+        "eligible_onset_probability": 0.025361664699210702,
+        "complete_parameter_events": 10592
+      },
+      "vertical": {
+        "event_count": 14018,
+        "events_per_minute": 32.38107381905406,
+        "active_fraction": 0.47076555899278183,
+        "eligible_onset_probability": 0.029926006891222018,
+        "complete_parameter_events": 13655
+      },
+      "overlap": {
+        "active_fraction": 0.30380575790839237
+      }
+    },
+    "val": {
+      "horizontal": {
+        "event_count": 2186,
+        "events_per_minute": 23.579614096855476,
+        "active_fraction": 0.45219303355079216,
+        "eligible_onset_probability": 0.020527749084421072,
+        "complete_parameter_events": 2116
+      },
+      "vertical": {
+        "event_count": 3021,
+        "events_per_minute": 32.58646577612095,
+        "active_fraction": 0.4307820751786269,
+        "eligible_onset_probability": 0.02783203125,
+        "complete_parameter_events": 2948
+      },
+      "overlap": {
+        "active_fraction": 0.24826227089158123
+      }
+    },
+    "test": {
+      "horizontal": {
+        "event_count": 2391,
+        "events_per_minute": 25.814935737976786,
+        "active_fraction": 0.5646960509950248,
+        "eligible_onset_probability": 0.028917323786947897,
+        "complete_parameter_events": 2313
+      },
+      "vertical": {
+        "event_count": 3184,
+        "events_per_minute": 34.3767274737424,
+        "active_fraction": 0.501904539800995,
+        "eligible_onset_probability": 0.034097967401315085,
+        "complete_parameter_events": 3103
+      },
+      "overlap": {
+        "active_fraction": 0.34479458177860695
+      }
+    }
+  },
+  "self_checks": {
+    "status": "passed",
+    "primitive_endpoint_value": [
+      0.0,
+      1.0
+    ],
+    "primitive_endpoint_velocity": [
+      0.0,
+      0.0
+    ],
+    "primitive_endpoint_acceleration": [
+      0.0,
+      0.0
+    ],
+    "label_consistency": {
+      "horizontal_physical_onsets": 2,
+      "horizontal_duplicate_onset_groups": 2,
+      "vertical_physical_onsets": 1,
+      "vertical_duplicate_onset_groups": 1
+    },
+    "horizontal_vertical_overlap_frames": 8,
+    "boundary_censored_events_checked": 2,
+    "simultaneous_trigger": true,
+    "latched_parameter_and_hold": true,
+    "absolute_endpoint_from_nonzero_start": true,
+    "signed_amplitude_equals_endpoint_minus_start": true,
+    "headlocal_per_frame_noise": false
+  },
+  "hazard_positive_weight": {
+    "horizontal": 6.256336904399832,
+    "vertical": 5.693646641545469
+  },
+  "hazard_calibration": {
+    "horizontal": {
+      "bias": -2.1749521552555073,
+      "eligible_target_rate": 0.02079507232620045,
+      "eligible_probability_mean": 0.020795072326200443,
+      "eligible_brier": 0.020095986579291014,
+      "eligible_frames": 193844,
+      "onsets": 4031
+    },
+    "vertical": {
+      "bias": -1.8389558025517068,
+      "eligible_target_rate": 0.027595376074534918,
+      "eligible_probability_mean": 0.027595376074534914,
+      "eligible_brier": 0.026365870234925176,
+      "eligible_frames": 197062,
+      "onsets": 5438
+    }
+  },
+  "closed_loop_probe": {
+    "seconds_requested": 60.0,
+    "steps": 2223,
+    "seconds_generated": 60.021,
+    "seed": 7045,
+    "headlocal_near_safety_boundary": {
+      "head_local_right_m": {
+        "low": -0.17683377861976624,
+        "high": 0.17883850634098053,
+        "near_boundary_fraction": 0.0,
+        "minimum": -0.06242916360497475,
+        "maximum": 0.06644076108932495
+      },
+      "head_local_forward_m": {
+        "low": -0.09151299297809601,
+        "high": 0.2293701320886612,
+        "near_boundary_fraction": 0.0,
+        "minimum": 0.0005555376410484314,
+        "maximum": 0.0860290378332138
+      },
+      "head_local_rotvec_y_rad_rh": {
+        "low": -0.8633066415786743,
+        "high": 0.8793057203292847,
+        "near_boundary_fraction": 0.0,
+        "minimum": -0.4981668293476105,
+        "maximum": 0.6091005802154541
+      },
+      "head_local_rotvec_z_rad_rh": {
+        "low": -0.31906211376190186,
+        "high": 0.3919796943664551,
+        "near_boundary_fraction": 0.0,
+        "minimum": -0.09940137714147568,
+        "maximum": 0.1649547517299652
+      },
+      "head_local_up_offset_m": {
+        "low": -0.08401191979646683,
+        "high": 0.08433204889297485,
+        "near_boundary_fraction": 0.0,
+        "minimum": -0.01525482814759016,
+        "maximum": 0.013245737180113792
+      },
+      "head_local_rotvec_x_rad_rh": {
+        "low": -0.944953978061676,
+        "high": 0.6812347769737244,
+        "near_boundary_fraction": 0.0,
+        "minimum": -0.5055378079414368,
+        "maximum": 0.33064180612564087
+      }
+    },
+    "headlocal_last_10s_minus_first_10s": {
+      "head_local_right_m": 0.022673388943076134,
+      "head_local_forward_m": -0.011434458196163177,
+      "head_local_rotvec_y_rad_rh": 0.23425403237342834,
+      "head_local_rotvec_z_rad_rh": -0.057672347873449326,
+      "head_local_up_offset_m": 0.004596323240548372,
+      "head_local_rotvec_x_rad_rh": 0.20271539688110352
+    },
+    "horizontal_event_count": 28,
+    "vertical_event_count": 32,
+    "simultaneous_event_count": 0,
+    "headlocal_randomness_contract": "seeded Bernoulli plus one bounded endpoint/duration sample per onset; no per-frame HeadLocal noise"
+  },
+  "model_config": {
+    "architecture": "independent_root_horizontal_vertical_lstm_holding_events",
+    "input_dim": 9,
+    "hidden_dim": 96,
+    "num_layers": 1,
+    "dropout": 0.0,
+    "root_indices": [
+      0,
+      1,
+      2
+    ],
+    "horizontal_indices": [
+      3,
+      5,
+      7,
+      8
+    ],
+    "vertical_indices": [
+      4,
+      6
+    ],
+    "horizontal_parameter_layout": [
+      "absolute_end_x_m",
+      "absolute_end_z_m",
+      "absolute_end_yaw_rad",
+      "absolute_end_roll_rad",
+      "log_duration_steps"
+    ],
+    "vertical_parameter_layout": [
+      "absolute_end_y_m",
+      "absolute_end_pitch_rad",
+      "log_duration_steps"
+    ],
+    "event_synthesis": "holding minimum-jerk S(u)=10u^3-15u^4+6u^5",
+    "runtime_trigger": "seeded Bernoulli hazard on eligible frames only",
+    "cooldown_steps": 4,
+    "duration_bounds_steps": [
+      5,
+      148
+    ],
+    "headlocal_noise": "none; Gaussian endpoint/duration is sampled once per onset; signed amplitude=end-current is latched"
+  },
+  "training_elapsed_seconds": 123.93096899997909,
+  "artifacts": {
+    "model": "models/normal_hmd_v4.pth",
+    "model_sha256": "ad667a54dca8072cda0c684c4e15047e279938b702cd6be1ff7806d7449bad5b",
+    "metadata": "models/normal_hmd_v4_metadata.json",
+    "metrics": "results/normal_hmd_v4_training_metrics.json",
+    "history": "results/normal_hmd_v4_training_history.json"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "numpy": "1.26.4",
+    "torch": "2.7.0+cu128"
+  },
+  "event_definition": {
+    "name": "normal_hmd_event_axis_analysis_sg_hysteresis_v1",
+    "semantics": "offline non-causal pseudo-label; centered SG has future context",
+    "dt_seconds": 0.027,
+    "savgol_window_frames": 9,
+    "savgol_polyorder": 2,
+    "high_quantile_train_only": 0.8,
+    "low_threshold_ratio": 0.5,
+    "minimum_event_frames": 5,
+    "merge_gap_frames": 4,
+    "thresholds": {
+      "lateral_sway_speed_mps": {
+        "high": 0.11908674359689526,
+        "low": 0.05954337179844763
+      },
+      "vertical_bob_speed_mps": {
+        "high": 0.044734538006409426,
+        "low": 0.022367269003204713
+      },
+      "look_turn_rate_radps": {
+        "high": 0.6108902693714624,
+        "low": 0.3054451346857312
+      },
+      "nod_rate_radps": {
+        "high": 0.3201524232640679,
+        "low": 0.16007621163203395
+      }
+    },
+    "horizontal_union": [
+      "head_local_x",
+      "yaw"
+    ],
+    "vertical_union": [
+      "head_local_y",
+      "pitch"
+    ],
+    "branches_may_overlap": true,
+    "parameter_censorship": "no amplitude/duration supervision if event touches fragment boundary"
+  },
+  "bounds": {
+    "horizontal_parameter_p05_p95": [
+      [
+        -0.0776843147118498,
+        -0.028037221826112978,
+        -0.6145740322349382,
+        -0.1681583829030585,
+        1.6094379124341003
+      ],
+      [
+        0.08085954314928248,
+        0.11240643310114658,
+        0.6332512261160513,
+        0.23771576377607442,
+        4.997212273764115
+      ]
+    ],
+    "vertical_parameter_p05_p95": [
+      [
+        -0.0240802734638705,
+        -0.6755358829900806,
+        1.6094379124341003
+      ],
+      [
+        0.021903054593574396,
+        0.4152625688355712,
+        4.997212273764115
+      ]
+    ],
+    "horizontal_absolute_pose_p01_p99": [
+      [
+        -0.17683378490921714,
+        -0.09151299198791049,
+        -0.8633066453329916,
+        -0.31906211187829137
+      ],
+      [
+        0.17883850348008634,
+        0.22937012489288355,
+        0.8793057324050294,
+        0.39197970122356873
+      ]
+    ],
+    "vertical_absolute_pose_p01_p99": [
+      [
+        -0.08401192020931274,
+        -0.9449539684888075
+      ],
+      [
+        0.08433205241345468,
+        0.6812347520352423
+      ]
+    ]
+  },
+  "normalization": {
+    "state_mean": [
+      0.0027590888340071583,
+      0.10213503374694864,
+      -0.000942444643538449,
+      0.0006531948384585001,
+      -0.0003035408944474484,
+      0.02417974947032422,
+      -0.07861529357350451,
+      0.0021146883671279964,
+      0.012442848526748032
+    ],
+    "state_std": [
+      0.24251928163080771,
+      0.23201909254075465,
+      0.5797150024519471,
+      0.05741473083531593,
+      0.03526993666115222,
+      0.05492888506960828,
+      0.33655753950370265,
+      0.34101163927524974,
+      0.13483897165361736
+    ],
+    "horizontal_parameter_center": [
+      0.0006264470328271453,
+      0.01219989595233231,
+      -0.0088410780591753,
+      0.0031817130063414973,
+      3.367295829986474
+    ],
+    "horizontal_parameter_scale": [
+      0.0408707573122921,
+      0.035719781029501727,
+      0.37829494669065794,
+      0.10444450074976128,
+      0.7008992738279278
+    ],
+    "vertical_parameter_center": [
+      0.0006436286075847022,
+      -0.05948560967138311,
+      2.9444389791664403
+    ],
+    "vertical_parameter_scale": [
+      0.012202428675688042,
+      0.31709958385337433,
+      0.8573992140459632
+    ]
+  },
+  "parameter_correlation": {
+    "horizontal": [
+      [
+        1.0,
+        0.022444657919968095,
+        0.04907795535287132,
+        -0.06224550085268303,
+        0.01667683371342809
+      ],
+      [
+        0.022444657919968095,
+        1.0000000000000002,
+        0.014882705060139015,
+        -0.011451979784008776,
+        0.16224145495382275
+      ],
+      [
+        0.04907795535287132,
+        0.014882705060139015,
+        1.0,
+        -0.030778322879087695,
+        0.00720559337291677
+      ],
+      [
+        -0.06224550085268303,
+        -0.011451979784008776,
+        -0.030778322879087695,
+        1.0000000000000002,
+        -0.011961803072034257
+      ],
+      [
+        0.01667683371342809,
+        0.16224145495382275,
+        0.00720559337291677,
+        -0.011961803072034257,
+        1.0
+      ]
+    ],
+    "vertical": [
+      [
+        1.0000000000000002,
+        0.2829521943051322,
+        -0.008078206680413463
+      ],
+      [
+        0.2829521943051322,
+        1.0,
+        -0.07190974429613028
+      ],
+      [
+        -0.008078206680413463,
+        -0.07190974429613028,
+        1.0000000000000002
+      ]
+    ]
+  },
+  "dataset_fingerprint_sha256": "6ee0c2cec93d9a1e98344e5f106151750689dae41a525e653f97fa8252fb9b39"
+}

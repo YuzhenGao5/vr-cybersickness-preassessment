@@ -1,0 +1,16 @@
+dataset: VR.net
+game: Pirate_Life
+target: session_max_MS_rating
+mapping:
+  low:
+    numeric_label: 0
+    rule: "max(MS_rating) <= 2"
+  medium:
+    numeric_label: 1
+    rule: "max(MS_rating) > 2"
+threshold:
+  value: 2
+  comparison: "low if <= threshold; medium if > threshold"
+frozen: true
+random_seed: 42
+warning: "Only 11 sessions; pipeline validation, not a final result or paper conclusion."

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "generic-scene-agent-contract-1.0",
+  "projectId": "unity-random-agent-demo",
+  "projectName": "UnityRandomAgentDemo",
+  "sceneName": "AuroraMotionCourtyard",
+  "generatedAtUtc": "2026-10-14T00:00:00Z",
+  "generator": "offline Unity source/scene analysis compiled into an auditable runtime contract",
+  "sourceReportPath": "results/generic_scene_agent/aurora_llm_scene_report.md",
+  "reportSummary": "An open courtyard has two crossing walkways, a central moving lattice, four corner observation portals, luminous trees and perimeter walls. Explore the centre and portals, pause to observe the dynamic landmark, and do not invent interactions because this scene exposes no gameplay interaction method.",
+  "sceneSemantics": [
+    "open courtyard",
+    "cross-shaped walkable route",
+    "dynamic visual landmark",
+    "four observation portals",
+    "no verified gameplay affordance"
+  ],
+  "safeInteractionMethods": [],
+  "disabledBehaviourTypes": ["RandomAgentDemo.RandomAgentController"],
+  "runtimeDiscoveryHints": [
+    {
+      "hintId": "discovery:aurora-runtime-landmarks",
+      "targetId": "runtime:aurora-landmarks",
+      "objectNamePatterns": ["Kinetic Lattice", "Observation Portal"],
+      "requiredComponents": ["Transform"],
+      "sourcePath": "Assets/Scripts/DemoSceneBootstrap.cs",
+      "locator": "BuildCourtyard",
+      "rationale": "These objects are created during Awake and therefore require live hierarchy grounding.",
+      "confidence": 0.95,
+      "discoveryOnly": true
+    }
+  ],
+  "sourceFindings": [
+    {
+      "path": "Assets/Scripts/DemoSceneBootstrap.cs",
+      "kind": "script",
+      "locator": "BuildCourtyard",
+      "finding": "DemoSceneBootstrap constructs the courtyard and landmarks during Awake.",
+      "confidence": 1.0
+    }
+  ],
+  "spawn": {
+    "position": { "x": 0.0, "y": 0.0, "z": -8.0 },
+    "yawDegrees": 0.0,
+    "evidence": "North-South Walkway occupies the centre line and lies inside the perimeter walls."
+  },
+  "targets": [
+    {
+      "id": "central_lattice",
+      "label": "Central kinetic lattice",
+      "semanticType": "dynamic-landmark",
+      "objectNameContains": "Kinetic Lattice",
+      "positionHint": { "x": 0.0, "y": 0.0, "z": 0.0 },
+      "approachOffset": { "x": 0.0, "y": 0.0, "z": -2.5 },
+      "arrivalRadius": 0.75,
+      "observeSeconds": 2.8,
+      "priority": 1.35,
+      "reason": "Observe live scene motion and establish the courtyard centre."
+    },
+    {
+      "id": "portal_north_east",
+      "label": "North-east observation portal",
+      "semanticType": "observation-portal",
+      "objectNameContains": "Observation Portal",
+      "positionHint": { "x": 7.6, "y": 0.0, "z": 7.6 },
+      "approachOffset": { "x": -1.3, "y": 0.0, "z": -1.3 },
+      "arrivalRadius": 0.9,
+      "observeSeconds": 1.5,
+      "priority": 1.0,
+      "reason": "Cover a distinct courtyard quadrant and inspect the portal structure."
+    },
+    {
+      "id": "portal_south_west",
+      "label": "South-west observation portal",
+      "semanticType": "observation-portal",
+      "objectNameContains": "Observation Portal",
+      "positionHint": { "x": -7.6, "y": 0.0, "z": -7.6 },
+      "approachOffset": { "x": 1.3, "y": 0.0, "z": 1.3 },
+      "arrivalRadius": 0.9,
+      "observeSeconds": 1.5,
+      "priority": 1.0,
+      "reason": "Cover a distinct courtyard quadrant and inspect the portal structure."
+    },
+    {
+      "id": "portal_north_west",
+      "label": "North-west observation portal",
+      "semanticType": "observation-portal",
+      "objectNameContains": "Observation Portal",
+      "positionHint": { "x": -7.6, "y": 0.0, "z": 7.6 },
+      "approachOffset": { "x": 1.3, "y": 0.0, "z": -1.3 },
+      "arrivalRadius": 0.9,
+      "observeSeconds": 1.5,
+      "priority": 0.96,
+      "reason": "Cover a distinct courtyard quadrant and inspect the portal structure."
+    },
+    {
+      "id": "portal_south_east",
+      "label": "South-east observation portal",
+      "semanticType": "observation-portal",
+      "objectNameContains": "Observation Portal",
+      "positionHint": { "x": 7.6, "y": 0.0, "z": -7.6 },
+      "approachOffset": { "x": -1.3, "y": 0.0, "z": 1.3 },
+      "arrivalRadius": 0.9,
+      "observeSeconds": 1.5,
+      "priority": 0.96,
+      "reason": "Cover a distinct courtyard quadrant and inspect the portal structure."
+    }
+  ],
+  "declaredLimitations": [
+    "The source project has no declared public gameplay interaction, so this contract schedules observation and never fabricates a button press.",
+    "The high-level brain is rule-based; EyeNavGS trains the motion prior, not semantic decision making.",
+    "Without a baked NavMesh the runtime uses analyser-provided approach points plus ground projection."
+  ]
+}

@@ -1,0 +1,23 @@
+version: "3.0"
+frozen_for_local_check: true
+purpose: "timestamp alignment and CPU feature plumbing; no risk threshold tuning"
+timestamp_unit: milliseconds
+timestamp_origin: first_csv_timestamp
+clip_duration_seconds: 1.0
+clip_interval: "[start_time,end_time)"
+output_fps: 30.0
+max_capture_gap_seconds: 0.5
+capture_gap_is_risk_threshold: false
+resampling: nearest_source_within_clip
+resampling_recovers_missing_motion: false
+local_max_clips_per_session: 20
+local_selection: evenly_spaced_valid_windows_without_labels
+server_max_clips_per_session: 0
+minimum_distinct_source_frames: 2
+minimum_engine_time_coverage_fraction: 0.8
+maximum_engine_derivative_interval_seconds: 0.5
+minimum_free_disk_bytes: 50000000000
+feature_sample_fps: 5.0
+feature_max_dimension_pixels: 320
+feature_provenance: RGB_only
+depth_model: null

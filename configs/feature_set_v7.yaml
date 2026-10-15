@@ -1,0 +1,50 @@
+version: v7
+source: features/vrnet_training_matrix_v7_clean.csv
+normalization: within_game_zscore
+rotation_cleanup:
+  maximum_plausible_degrees_per_second: 720
+  action: set_above_threshold_to_missing_before_session_aggregation
+feature_sets:
+  core:
+    - fov_horizontal_mean
+    - fov_vertical_mean
+    - camera_speed_mean
+    - camera_acceleration_mean
+    - object_count_mean
+    - object_speed_mean
+  extended:
+    - fov_horizontal_mean
+    - fov_vertical_mean
+    - camera_speed_mean
+    - camera_acceleration_mean
+    - object_count_mean
+    - object_speed_mean
+    - camera_rotation_rate_mean
+    - camera_rotation_rate_std
+    - fov_horizontal_std
+    - fov_vertical_std
+  full:
+    - fov_horizontal_mean
+    - fov_horizontal_max
+    - fov_horizontal_std
+    - fov_vertical_mean
+    - fov_vertical_max
+    - fov_vertical_std
+    - camera_speed_mean
+    - camera_speed_max
+    - camera_speed_std
+    - camera_rotation_rate_mean
+    - camera_rotation_rate_max
+    - camera_rotation_rate_std
+    - camera_acceleration_mean
+    - camera_acceleration_max
+    - object_count_mean
+    - object_count_max
+    - object_speed_mean
+    - object_speed_max
+label_mapping:
+  low: "max(MS_rating) <= 2"
+  medium: "max(MS_rating) > 2"
+  frozen: true
+random_seed: 42
+warning: "Exploratory feature cleanup and comparison; not a final validated model."

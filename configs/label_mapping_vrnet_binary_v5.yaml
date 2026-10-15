@@ -1,0 +1,16 @@
+dataset: VR.net
+target: session_max_MS_rating
+mapping:
+  low:
+    numeric_label: 0
+    rule: "max(MS_rating) <= 2"
+  medium:
+    numeric_label: 1
+    rule: "max(MS_rating) > 2"
+threshold:
+  value: 2
+  comparison: "low if <= threshold; medium if > threshold"
+frozen: true
+random_seed: 42
+validation: Leave-One-Game-Out
+warning: "Small exploratory sample; not a final result or paper conclusion."

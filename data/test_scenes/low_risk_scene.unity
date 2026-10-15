@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+# SYNTHETIC PARSER FIXTURE ONLY. Not captured from a real Unity project.
+# The nonzero skybox reference below is a synthetic parser cue, not a shipped Unity material asset.
+--- !u!104 &1
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_SkyboxMaterial: {fileID: 2100000, guid: 11111111111111111111111111111111, type: 2}
+--- !u!1 &1101
+GameObject:
+  m_Name: Main Camera
+  m_Component:
+  - component: {fileID: 2101}
+  - component: {fileID: 3101}
+  m_IsActive: 1
+  m_StaticEditorFlags: 0
+--- !u!4 &2101
+Transform:
+  m_GameObject: {fileID: 1101}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!20 &3101
+Camera:
+  m_GameObject: {fileID: 1101}
+  m_Enabled: 1
+  field of view: 90
+  near clip plane: 0.3
+  far clip plane: 1000
+--- !u!1 &1102
+GameObject:
+  m_Name: Directional Light
+  m_Component:
+  - component: {fileID: 2102}
+  - component: {fileID: 3102}
+  m_IsActive: 1
+  m_StaticEditorFlags: 0
+--- !u!4 &2102
+Transform:
+  m_GameObject: {fileID: 1102}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!108 &3102
+Light:
+  m_GameObject: {fileID: 1102}
+  m_Enabled: 1
+  m_Type: 1
+--- !u!1 &1103
+GameObject:
+  m_Name: Ground
+  m_Component:
+  - component: {fileID: 2103}
+  - component: {fileID: 3103}
+  - component: {fileID: 3104}
+  m_IsActive: 1
+  m_StaticEditorFlags: 1
+--- !u!4 &2103
+Transform:
+  m_GameObject: {fileID: 1103}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!33 &3103
+MeshFilter:
+  m_GameObject: {fileID: 1103}
+  m_Mesh: {fileID: 0}
+--- !u!23 &3104
+MeshRenderer:
+  m_GameObject: {fileID: 1103}
+  m_Enabled: 1
+--- !u!1 &1104
+GameObject:
+  m_Name: Static Landmark
+  m_Component:
+  - component: {fileID: 2104}
+  m_IsActive: 1
+  m_StaticEditorFlags: 1
+--- !u!4 &2104
+Transform:
+  m_GameObject: {fileID: 1104}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!1 &1105
+GameObject:
+  m_Name: Background Element
+  m_Component:
+  - component: {fileID: 2105}
+  m_IsActive: 1
+  m_StaticEditorFlags: 0
+--- !u!4 &2105
+Transform:
+  m_GameObject: {fileID: 1105}
+  m_Children: []
+  m_Father: {fileID: 0}

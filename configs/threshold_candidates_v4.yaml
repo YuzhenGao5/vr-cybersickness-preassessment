@@ -1,0 +1,597 @@
+version: 4.0-candidates
+review_complete: true
+review_date: '2026-10-08'
+based_on: arXiv:2306.03381v1 (2023-06-06); local supplied PDF
+note: Candidate evidence registry only. No new final labels enabled here. Feature three gates must be
+  completed before iteration. Numeric source existence and applicability are separate.
+evidence_gate_definitions:
+  source_verified: Exact candidate numeric/definition verified in a primary source; abstract/index access
+    recorded.
+  threshold_claim_verified: Primary source measures an onset threshold for stated condition; does not
+    imply universality.
+  source_scope_match: Current feature definition, reference frame, timestep, statistic, exposure and measurement
+    conditions match evidence; currently false for all.
+  threshold_unit_verified: Source unit is confirmed, independently of current VR.net meter calibration.
+unknown_handling: If any required gate fails, all audit examples for this candidate remain unknown; do
+  not emit61negative labels.
+candidates:
+- id: speed_3
+  label: fast_camera_speed
+  feature: camera_speed
+  value: 3
+  unit: m/s
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: paper_operational_rule_with_experimental_condition_citation
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: true
+  source_url: https://arxiv.org/abs/2306.03381v1
+  doi: 10.48550/arXiv.2306.03381
+  page: PDF pp10-12, references pp15,17-19
+  conditions: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value is unspecified;
+    object cutoffs100/150 balance classes.
+  applicability: requires_validation
+  reason: VR.net v1 rule exists; original Presence study uses RMS conditions3.3/4.3/9.5; no universal3m/s
+    onset boundary. Current units and movement source uncalibrated.
+  original_sources:
+  - title: 'VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research'
+    authors: Elliott Wen et al.
+    year: 2023
+    doi: 10.48550/arXiv.2306.03381
+    url: https://arxiv.org/abs/2306.03381v1
+    access: local_full_text_verified
+    page: PDF pp10-12, references pp15,17-19
+    quote_or_paraphrase: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value
+      is unspecified; object cutoffs100/150 balance classes.
+  - title: 'A Metric to Quantify Virtual Scene Movement for the Study of Cybersickness: Definition, Implementation,
+      and Verification'
+    authors: Richard H. Y. So; Andy Ho; W. T. Lo
+    year: 2001
+    doi: 10.1162/105474601750216803
+    url: https://www.ieda.ust.hk/dfaculty/so/pdf/So-et-al-2001-Presence.pdf
+    access: author_hosted_original_full_text
+    page: journal pp203-204; PDF pp11-12; §3.2 and Table1
+    quote_or_paraphrase: Three viewer-centred fore-aft RMS speed conditions3.3/4.3/9.5m/s over30min; not
+      a3m/s onset cutoff.
+  - title: Effects of Navigation Speed on Motion Sickness Caused by an Immersive Virtual Environment
+    authors: Richard H. Y. So; W. T. Lo; Andy T. K. Ho
+    year: 2001
+    doi: 10.1518/001872001775898223
+    url: https://www.ieda.ust.hk/dfaculty/so/pdf/So-et-al-2001a-HumanFactors.pdf
+    access: author_original_pdf_search_index_verified; direct_fetch_timeout
+    page: journal pp452-461; Table1 p455; abstract p452
+    quote_or_paraphrase: 96 men; eight fore-aft RMS speed conditions3/4/6/8/10/24/30/59m/s over30min;
+      nausea and vection increased3–10 then plateaued.
+  priority: 1
+  audit_column: camera_speed_mean
+  required_statistic: clip_fore_aft_rms_or_explicit_reproduction_rule
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: speed_10
+  label: fast_camera_speed
+  feature: camera_speed
+  value: 10
+  unit: m/s
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: experimental_condition_and_response_plateau
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: true
+  source_url: https://www.ieda.ust.hk/dfaculty/so/pdf/So-et-al-2001a-HumanFactors.pdf
+  doi: 10.1518/001872001775898223
+  page: journal pp452-461; Table1 p455; abstract p452
+  conditions: 96 men; eight fore-aft RMS speed conditions3/4/6/8/10/24/30/59m/s over30min; nausea and
+    vection increased3–10 then plateaued.
+  applicability: requires_validation
+  reason: 10m/s is testedcondition and approximate nausea/vection plateau, notsafeupperlimit orbinarydangerboundary.
+  original_sources:
+  - title: Effects of Navigation Speed on Motion Sickness Caused by an Immersive Virtual Environment
+    authors: Richard H. Y. So; W. T. Lo; Andy T. K. Ho
+    year: 2001
+    doi: 10.1518/001872001775898223
+    url: https://www.ieda.ust.hk/dfaculty/so/pdf/So-et-al-2001a-HumanFactors.pdf
+    access: author_original_pdf_search_index_verified; direct_fetch_timeout
+    page: journal pp452-461; Table1 p455; abstract p452
+    quote_or_paraphrase: 96 men; eight fore-aft RMS speed conditions3/4/6/8/10/24/30/59m/s over30min;
+      nausea and vection increased3–10 then plateaued.
+  priority: 2
+  audit_column: camera_speed_mean
+  required_statistic: fore_aft_rms
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: speed_change_x
+  label: fast_camera_speed
+  feature: camera_speed
+  value: null
+  unit: unknown
+  operator: '>'
+  statistic: not_frozen
+  source_verified: false
+  source_role: source_not_found
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: unknown
+  doi: unknown
+  page: unknown
+  conditions: unknown
+  applicability: requires_validation
+  reason: No verified numeric rate-of-speed-change threshold; rate units would be acceleration rather
+    than speed.
+  original_sources: []
+  priority: 3
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: acceleration_0_7
+  label: high_camera_acceleration
+  feature: camera_acceleration
+  value: 0.7
+  unit: m/s^2
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: condition_specific_onset_mean
+  source_scope_match: false
+  threshold_claim_verified: true
+  threshold_unit_verified: true
+  source_url: https://ntrs.nasa.gov/api/citations/20200000787/downloads/20200000787.pdf
+  doi: 10.2514/6.2020-0171
+  page: PDF pp5-9; §III.D/IV.C/Table4 p9
+  conditions: 18 participants; HTC Vive Pro110°; stationary gaze in particle field;3s acceleration; FA
+    onset mean.700 SD.481; large individual variation.
+  applicability: requires_validation
+  reason: OriginalTable4FAmean=.700 and VR.net rule verified; forwardparticlefield3sexposure, notunqualifiedsessionpeakacceleration.
+    VR.net meter calibration unknown.
+  original_sources:
+  - title: Rotational and Translational Velocity and Acceleration Thresholds for the Onset of Cybersickness
+      in Virtual Reality
+    authors: Lorenzo Terenzi; Peter M. T. Zaal
+    year: 2020
+    doi: 10.2514/6.2020-0171
+    url: https://ntrs.nasa.gov/api/citations/20200000787/downloads/20200000787.pdf
+    access: NASA_original_full_text
+    page: PDF pp5-9; §III.D/IV.C/Table4 p9
+    quote_or_paraphrase: 18 participants; HTC Vive Pro110°; stationary gaze in particle field;3s acceleration;
+      FA onset mean.700 SD.481; large individual variation.
+  - title: 'VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research'
+    authors: Elliott Wen et al.
+    year: 2023
+    doi: 10.48550/arXiv.2306.03381
+    url: https://arxiv.org/abs/2306.03381v1
+    access: local_full_text_verified
+    page: PDF pp10-12, references pp15,17-19
+    quote_or_paraphrase: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value
+      is unspecified; object cutoffs100/150 balance classes.
+  priority: 1
+  audit_column: camera_acceleration_mean
+  required_statistic: constant_forward_acceleration_3sec
+  evidence_numeric_values:
+    FA_mean: 0.7
+    FA_sd: 0.481
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: acceleration_0_3
+  label: high_camera_acceleration
+  feature: camera_acceleration
+  value: 0.3
+  unit: m/s^2
+  operator: '>'
+  statistic: not_frozen
+  source_verified: false
+  source_role: source_not_found_for_exact_value
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: https://www.mdpi.com/2076-3417/10/21/7808
+  doi: 10.3390/app10217808
+  page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+  conditions: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral onset mean.328,vertical.311m/s²;
+    reported thresholds differ by direction and repetition.
+  applicability: requires_validation
+  reason: No exact.300cutoff in verified originals; .328/.311 are separate direction-specific means; do
+    notround intoanewcutoff.
+  original_sources:
+  - title: The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow
+    authors: Jiwon Kim; Taezoon Park
+    year: 2020
+    doi: 10.3390/app10217808
+    url: https://www.mdpi.com/2076-3417/10/21/7808
+    full_text_url: https://pdfs.semanticscholar.org/378f/5379df7b0dd944a472a49435e3f6221f0b64.pdf
+    access: original_published_PDF_mirror_full_text_verified; publisher429
+    page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+    quote_or_paraphrase: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral
+      onset mean.328,vertical.311m/s²; reported thresholds differ by direction and repetition.
+  priority: 2
+  audit_column: camera_acceleration_mean
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: acceleration_0_328
+  label: high_camera_acceleration
+  feature: camera_acceleration
+  value: 0.328
+  unit: m/s^2
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: condition_specific_onset_mean
+  source_scope_match: false
+  threshold_claim_verified: true
+  threshold_unit_verified: true
+  source_url: https://www.mdpi.com/2076-3417/10/21/7808
+  doi: 10.3390/app10217808
+  page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+  conditions: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral onset mean.328,vertical.311m/s²;
+    reported thresholds differ by direction and repetition.
+  applicability: requires_validation
+  reason: KimParkLAmean=.328; stationarygaze lateralparticlefield3s; units/motionaxis/duration/currentmetric
+    notmatched.
+  original_sources:
+  - title: The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow
+    authors: Jiwon Kim; Taezoon Park
+    year: 2020
+    doi: 10.3390/app10217808
+    url: https://www.mdpi.com/2076-3417/10/21/7808
+    full_text_url: https://pdfs.semanticscholar.org/378f/5379df7b0dd944a472a49435e3f6221f0b64.pdf
+    access: original_published_PDF_mirror_full_text_verified; publisher429
+    page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+    quote_or_paraphrase: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral
+      onset mean.328,vertical.311m/s²; reported thresholds differ by direction and repetition.
+  priority: 3
+  audit_column: camera_acceleration_mean
+  required_statistic: constant_lateral_acceleration_3sec
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: acceleration_0_311
+  label: high_camera_acceleration
+  feature: camera_acceleration
+  value: 0.311
+  unit: m/s^2
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: condition_specific_onset_mean
+  source_scope_match: false
+  threshold_claim_verified: true
+  threshold_unit_verified: true
+  source_url: https://www.mdpi.com/2076-3417/10/21/7808
+  doi: 10.3390/app10217808
+  page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+  conditions: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral onset mean.328,vertical.311m/s²;
+    reported thresholds differ by direction and repetition.
+  applicability: requires_validation
+  reason: KimParkVAmean=.311; stationarygaze verticalparticlefield3s; units/motionaxis/duration/currentmetric
+    notmatched.
+  original_sources:
+  - title: The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow
+    authors: Jiwon Kim; Taezoon Park
+    year: 2020
+    doi: 10.3390/app10217808
+    url: https://www.mdpi.com/2076-3417/10/21/7808
+    full_text_url: https://pdfs.semanticscholar.org/378f/5379df7b0dd944a472a49435e3f6221f0b64.pdf
+    access: original_published_PDF_mirror_full_text_verified; publisher429
+    page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+    quote_or_paraphrase: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral
+      onset mean.328,vertical.311m/s²; reported thresholds differ by direction and repetition.
+  priority: 4
+  audit_column: camera_acceleration_mean
+  required_statistic: constant_vertical_acceleration_3sec
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: multi_axis_bonato
+  label: multi_axis_rotation
+  feature: camera_angular_velocity
+  value: null
+  unit: deg/s
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: experimental_condition
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: https://pubmed.ncbi.nlm.nih.gov/19911517/
+  doi: 10.3357/asem.2394.2009
+  page: journal pp941-945; abstract p941
+  conditions: 19 observers; virtual cube at60°/s pitch-only versus simultaneouspitch+roll;5min; strongerSSQ
+    in dualaxis, no activation threshold established.
+  applicability: requires_validation
+  reason: 60°/s is single/dualaxisstimulus; no minimumaxisactivationvalue recovered. VR.netpredefinedvalue
+    unspecified.
+  original_sources:
+  - title: Combined pitch and roll and cybersickness in a virtual environment
+    authors: Frederick Bonato; Andrea Bubka; Stephen Palmisano
+    year: 2009
+    doi: 10.3357/asem.2394.2009
+    url: https://pubmed.ncbi.nlm.nih.gov/19911517/
+    access: original_abstract_verified; publisher_full_text_unavailable
+    page: journal pp941-945; abstract p941
+    quote_or_paraphrase: 19 observers; virtual cube at60°/s pitch-only versus simultaneouspitch+roll;5min;
+      strongerSSQ in dualaxis, no activation threshold established.
+  - title: 'VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research'
+    authors: Elliott Wen et al.
+    year: 2023
+    doi: 10.48550/arXiv.2306.03381
+    url: https://arxiv.org/abs/2306.03381v1
+    access: local_full_text_verified
+    page: PDF pp10-12, references pp15,17-19
+    quote_or_paraphrase: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value
+      is unspecified; object cutoffs100/150 balance classes.
+  priority: 1
+  evidence_numeric_values:
+    stimulus_rotation_rate: 60
+    exposure_sec: 300
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: multi_axis_keshavarz
+  label: multi_axis_rotation
+  feature: camera_angular_velocity
+  value: null
+  unit: unknown
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: experimental_condition
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: https://pubmed.ncbi.nlm.nih.gov/22097636/
+  doi: 10.3357/asem.3078.2011
+  page: journal pp1023-1029; abstract p1023
+  conditions: 61 people;15min rollercoaster videos;pitch-only versuspitch+roll versuspitch+roll+yaw; double/triple
+    worse than single, no5°/frame rule in accessibletext.
+  applicability: requires_validation
+  reason: Single/dual/tripleconditions support factor; no transferable axisactivationnumericthreshold
+    verified.
+  original_sources:
+  - title: 'Axis rotation and visually induced motion sickness: the role of combined roll, pitch, and
+      yaw motion'
+    authors: Behrang Keshavarz; Heiko Hecht
+    year: 2011
+    doi: 10.3357/asem.3078.2011
+    url: https://pubmed.ncbi.nlm.nih.gov/22097636/
+    full_text_url: https://asma.kglmeridian.com/downloadpdf/view/journals/asem/82/11/article-p1023.pdf
+    access: original_abstract_verified; publisher_PDF_index_only_direct_fetch_error
+    page: journal pp1023-1029; abstract p1023
+    quote_or_paraphrase: 61 people;15min rollercoaster videos;pitch-only versuspitch+roll versuspitch+roll+yaw;
+      double/triple worse than single, no5°/frame rule in accessibletext.
+  priority: 2
+  evidence_numeric_values:
+    exposure_sec: 900
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: multi_axis_5_per_frame
+  label: multi_axis_rotation
+  feature: camera_angular_velocity
+  value: 5
+  unit: deg/frame
+  operator: '>'
+  statistic: not_frozen
+  source_verified: false
+  source_role: source_not_found
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: unknown
+  doi: unknown
+  page: unknown
+  conditions: unknown
+  applicability: requires_validation
+  reason: No verified source. Perframeangle changes with timestep; cannotconvert todeg/s withoutactualinterval
+    orclaim literaturevalidation.
+  original_sources: []
+  priority: 3
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: fov_120
+  label: wide_fov
+  feature: fov
+  value: 120
+  unit: degrees
+  operator: '>'
+  statistic: not_frozen
+  source_verified: false
+  source_role: unverified_secondary_attribution
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: https://doi.org/10.1109/VR.2001.913791
+  doi: 10.1109/VR.2001.913791
+  page: journal pp235-240; numerical location unknown
+  conditions: German dissertation attributed90–120°toDuh; original numerical anddirectiondefinition notverified;
+    no120°riskcutoff established.
+  applicability: requires_validation
+  reason: Germanthesis90–120°claim traces toDuh2001 but originalnumericproof absent; range is notwideFOVriskcutoff.
+    Projection/hardware/restrictorFOV differ.
+  original_sources:
+  - title: Effects of field of view on balance in an immersive environment
+    authors: Henry Been-Lirn Duh; James J. W. Lin; Robert V. Kenyon; Donald E. Parker; Thomas A. Furness
+    year: 2001
+    doi: 10.1109/VR.2001.913791
+    url: https://doi.org/10.1109/VR.2001.913791
+    access: bibliographic_reference_verified; original_full_text_not_accessed
+    page: journal pp235-240; numerical location unknown
+    quote_or_paraphrase: German dissertation attributed90–120°toDuh; original numerical anddirectiondefinition
+      notverified; no120°riskcutoff established.
+  priority: 1
+  audit_column: fov_horizontal_mean
+  secondary_source_url: https://tuprints.ulb.tu-darmstadt.de/12788/1/Dissertation_Eller.pdf
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: fov_100
+  label: wide_fov
+  feature: fov
+  value: 100
+  unit: degrees
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: restrictor_geometry_example_and_preference_maximum
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: true
+  source_url: https://www.cs.columbia.edu/2016/combating-vr-sickness/images/combating-vr-sickness.pdf
+  doi: 10.1109/3DUI.2016.7460053
+  page: journal pp201-210; §4.1 p203,§7 p207
+  conditions: 30 seated participants; dynamic circularrestrictor formal80°/90°minFOV;100°appears intextureexamples/preference
+    maxima, notriskcutoff.
+  applicability: requires_validation
+  reason: FernandesFeiner100° appears inIFOV/OFOVexample andpilotpreference extrema; formalminFOV80/90;
+    nothorizontalprojectionriskboundary.
+  original_sources:
+  - title: Combating VR sickness through subtle dynamic field-of-view modification
+    authors: Ajoy S. Fernandes; Steven K. Feiner
+    year: 2016
+    doi: 10.1109/3DUI.2016.7460053
+    url: https://www.cs.columbia.edu/2016/combating-vr-sickness/images/combating-vr-sickness.pdf
+    access: author_original_full_text_search_index_verified; direct_fetch_error
+    page: journal pp201-210; §4.1 p203,§7 p207
+    quote_or_paraphrase: 30 seated participants; dynamic circularrestrictor formal80°/90°minFOV;100°appears
+      intextureexamples/preference maxima, notriskcutoff.
+  priority: 2
+  audit_column: fov_horizontal_mean
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: density_150
+  label: high_object_density
+  feature: object_count
+  value: 150
+  unit: distinct_visible_objects_per_1sec
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: distribution_balancing_experiment
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: true
+  source_url: https://arxiv.org/abs/2306.03381v1
+  doi: 10.48550/arXiv.2306.03381
+  page: PDF pp10-12, references pp15,17-19
+  conditions: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value is unspecified;
+    object cutoffs100/150 balance classes.
+  applicability: requires_validation
+  reason: VR.netBeatSaberthreshold chosen foruniformclassdistribution; requiresboundsfilter andone-second
+    distinctobjects, notmeanrawrendererentries. Forbiddenasdistribution-derivedriskcutoff.
+  original_sources:
+  - title: 'VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research'
+    authors: Elliott Wen et al.
+    year: 2023
+    doi: 10.48550/arXiv.2306.03381
+    url: https://arxiv.org/abs/2306.03381v1
+    access: local_full_text_verified
+    page: PDF pp10-12, references pp15,17-19
+    quote_or_paraphrase: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value
+      is unspecified; object cutoffs100/150 balance classes.
+  priority: 1
+  audit_column: object_count_mean
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: density_100
+  label: high_object_density
+  feature: object_count
+  value: 100
+  unit: distinct_visible_objects_per_1sec
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: distribution_balancing_experiment
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: true
+  source_url: https://arxiv.org/abs/2306.03381v1
+  doi: 10.48550/arXiv.2306.03381
+  page: PDF pp10-12, references pp15,17-19
+  conditions: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value is unspecified;
+    object cutoffs100/150 balance classes.
+  applicability: requires_validation
+  reason: SameBeatSaberclassbalancing origin; boundary100 betweenlow/medium alsoambiguousintext; noindependenthumanriskvalidation.
+  original_sources:
+  - title: 'VR.net: A Real-world Dataset for Virtual Reality Motion Sickness Research'
+    authors: Elliott Wen et al.
+    year: 2023
+    doi: 10.48550/arXiv.2306.03381
+    url: https://arxiv.org/abs/2306.03381v1
+    access: local_full_text_verified
+    page: PDF pp10-12, references pp15,17-19
+    quote_or_paraphrase: v1 uses 3 m/s and 0.7 m/s² in a proof of concept; multi-axis activation value
+      is unspecified; object cutoffs100/150 balance classes.
+  priority: 2
+  audit_column: object_count_mean
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false
+- id: object_speed_unverified
+  label: high_object_speed
+  feature: object_speed
+  value: null
+  unit: unknown
+  operator: '>'
+  statistic: not_frozen
+  source_verified: false
+  source_role: source_not_found
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: unknown
+  doi: unknown
+  page: unknown
+  conditions: unknown
+  applicability: requires_validation
+  reason: No verified semanticobjectworldvelocityriskcutoff; requiresobjectidentity,coordinatescale,observerrelativegeometry.
+  original_sources: []
+  priority: 1
+  audit_column: object_speed_mean
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: false
+  model_training_allowed_by_this_file: false
+- id: optical_flow_kim_park
+  label: high_optical_flow
+  feature: optical_flow
+  value: null
+  unit: pixel/s_model_not_Farneback_mean
+  operator: '>'
+  statistic: not_frozen
+  source_verified: true
+  source_role: condition_specific_motion_onset_not_pixel_threshold
+  source_scope_match: false
+  threshold_claim_verified: false
+  threshold_unit_verified: false
+  source_url: https://www.mdpi.com/2076-3417/10/21/7808
+  doi: 10.3390/app10217808
+  page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+  conditions: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral onset mean.328,vertical.311m/s²;
+    reported thresholds differ by direction and repetition.
+  applicability: requires_validation
+  reason: KimParkthresholdtablecontainsparticletranslation/rotationrates, notFarnebackmeanmoduluscutoff;
+    opticalflowisbrightnessweightedprojectionmodel.
+  original_sources:
+  - title: The Onset Threshold of Cybersickness in Constant and Accelerating Optical Flow
+    authors: Jiwon Kim; Taezoon Park
+    year: 2020
+    doi: 10.3390/app10217808
+    url: https://www.mdpi.com/2076-3417/10/21/7808
+    full_text_url: https://pdfs.semanticscholar.org/378f/5379df7b0dd944a472a49435e3f6221f0b64.pdf
+    access: original_published_PDF_mirror_full_text_verified; publisher429
+    page: PDF pp3-7; §3.1/3.4/4.1.1/Table4 p7; §5.3 p12
+    quote_or_paraphrase: 16 participants;110° VivePro particle field;3s accelerating stimuli; lateral
+      onset mean.328,vertical.311m/s²; reported thresholds differ by direction and repetition.
+  priority: 1
+  requires_feature_gate: true
+  actual_vrnet_unit_verified: see_feature_gate
+  model_training_allowed_by_this_file: false

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Scene Agent LLM Advisory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scene_summary",
+    "likely_player_loop",
+    "planning_advice",
+    "source_findings",
+    "runtime_discovery_hints",
+    "important_unknowns",
+    "rendering_checks"
+  ],
+  "properties": {
+    "scene_summary": {
+      "type": "string"
+    },
+    "likely_player_loop": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 12
+    },
+    "planning_advice": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["target_id", "rationale", "recommended_skills", "confidence"],
+        "properties": {
+          "target_id": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "recommended_skills": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "observe_scene",
+                "orient_head",
+                "navigate_to",
+                "look_at",
+                "wait",
+                "interact",
+                "enter_or_ride",
+                "verify",
+                "replan"
+              ]
+            },
+            "maxItems": 9
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "source_findings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "kind", "locator", "finding", "confidence"],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": ["scene", "prefab", "script", "settings", "package"]
+          },
+          "locator": {
+            "type": "string"
+          },
+          "finding": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "runtime_discovery_hints": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "hint_id",
+          "target_id",
+          "object_name_patterns",
+          "required_components",
+          "source_path",
+          "locator",
+          "rationale",
+          "confidence",
+          "authorization"
+        ],
+        "properties": {
+          "hint_id": {
+            "type": "string"
+          },
+          "target_id": {
+            "type": "string"
+          },
+          "object_name_patterns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8
+          },
+          "required_components": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 8
+          },
+          "source_path": {
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "authorization": {
+            "type": "string",
+            "enum": ["discovery_only"]
+          }
+        }
+      }
+    },
+    "important_unknowns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20
+    },
+    "rendering_checks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20
+    }
+  }
+}

@@ -1,0 +1,109 @@
+schema_version: "1.0"
+dataset: "VR.net v6 session matrix"
+analysis_unit: "session"
+source_matrix: "features/vrnet_training_matrix_v6.csv"
+label_source: "rule_generated_proxy"
+proxy_disclaimer: >-
+  These labels are deterministic, rule-generated proxy labels. They are not
+  participant MS_rating/FMS observations and are not validated cybersickness
+  outcomes.
+excluded_outcome_patterns:
+  - "ms_rating"
+  - "fms"
+outputs:
+  labels: "features/risk_factor_labels.csv"
+  training_matrix: "features/risk_factor_training_matrix.csv"
+  distribution_report: "results/risk_factor_label_distribution.md"
+
+rules:
+  - id: "fast_camera_speed"
+    label_source: "rule_generated_proxy"
+    required_features:
+      - "camera_speed_max"
+    operator: ">"
+    threshold: 3.0
+    unit: "VR.net matrix source-coordinate units/s (not confirmed m/s)"
+    threshold_source: "user_specified"
+    evidence_status: "unverified_user_specified_heuristic"
+    evidence_note: >-
+      Local literature notes discuss 3–10 m/s in a specific forward-navigation
+      experiment. The VR.net matrix coordinate scale is not calibrated to metres,
+      so that literature does not validate a 3.0 cutoff for this feature.
+    operationalized: true
+
+  - id: "high_camera_acceleration"
+    label_source: "rule_generated_proxy"
+    required_features:
+      - "camera_acceleration_max"
+    operator: ">"
+    threshold: 0.7
+    unit: "VR.net matrix source-coordinate units/s^2 (not confirmed m/s^2)"
+    threshold_source: "user_specified"
+    evidence_status: "unsupported_user_specified_heuristic"
+    evidence_note: >-
+      No local reviewed evidence establishes 0.7 in this matrix feature and unit
+      as a general cybersickness cutoff.
+    operationalized: true
+
+  - id: "multi_axis_rotation"
+    label_source: "rule_generated_proxy"
+    required_features:
+      - "yaw_change"
+      - "pitch_change"
+      - "roll_change"
+    operator: "any_two_abs_axis_changes_greater_than"
+    threshold: null
+    unit: "degrees or degrees/s; exact change definition and cutoff not supplied"
+    threshold_source: "not_supplied"
+    evidence_status: "factor_supported_but_proxy_rule_not_operationalized"
+    evidence_note: >-
+      configs/risk_factor_rules.yaml defines multi-axis exposure as at least two
+      rotation axes, but it does not define the numeric yaw/pitch/roll change
+      cutoff requested here. The v6 session matrix also has only scalar rotation
+      rate summaries, not separate yaw/pitch/roll changes. The label must remain
+      unknown rather than inventing a cutoff.
+    operationalized: false
+
+  - id: "wide_fov"
+    label_source: "rule_generated_proxy"
+    required_features:
+      - "fov_horizontal_mean"
+    operator: ">"
+    threshold: 100.0
+    unit: "degrees"
+    threshold_source: "user_specified"
+    evidence_status: "unsupported_user_specified_heuristic"
+    evidence_note: >-
+      The local evidence review does not support a fixed FOV greater than 100
+      degrees as a general sickness boundary; dynamic FOV interventions are
+      context dependent.
+    operationalized: true
+
+  - id: "high_object_density"
+    label_source: "rule_generated_proxy"
+    required_features:
+      - "object_count_mean"
+    operator: ">"
+    threshold: 150.0
+    unit: "mean count of matrix object entries per sampled row"
+    threshold_source: "user_specified"
+    evidence_status: "unsupported_user_specified_heuristic"
+    evidence_note: >-
+      No local reviewed evidence validates 150 matrix object entries as a
+      cybersickness cutoff. Matrix entries are not guaranteed to be distinct
+      visible semantic objects.
+    operationalized: true
+
+  - id: "high_object_speed"
+    label_source: "rule_generated_proxy"
+    required_features:
+      - "object_speed_mean"
+    operator: ">"
+    threshold: 5.0
+    unit: "VR.net matrix source-coordinate units/s (not confirmed m/s)"
+    threshold_source: "user_specified"
+    evidence_status: "unsupported_user_specified_heuristic"
+    evidence_note: >-
+      No local reviewed evidence establishes 5.0 in this matrix feature and unit
+      as a general cybersickness cutoff.
+    operationalized: true

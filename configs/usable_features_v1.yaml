@@ -1,0 +1,296 @@
+version: '1.0'
+frozen: true
+frozen_date: '2026-10-08'
+frozen_at_utc: '2026-10-07T14:38:10.270163+00:00'
+scope: Local VR.net audit plus synthetic Unity 6000.2.9f1 Editor; no real XR validation
+evidence:
+- results/vrnet_feature_probe.json
+- results/vrnet_feature_probe.md
+- results/unity_feature_probe.json
+- results/unity_feature_probe.md
+classification_note: 基础可用仅证明限定范围的技术读取与调整；条件可用不进入阈值标签生成，先解除条件；未校准米制一律不能写meters。
+usable_features:
+- name: camera_position
+  vrnet_source: v_matrix inverse row 3, columns 0:3 under observed serialization
+  vrnet_status: 'yes'
+  unity_source: World-space Transform of an untracked camera child; parent path rig
+    was moved.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改无头部跟踪相机的父级路径rig位置
+  unit: source_coordinate_unit
+  unit_verified: false
+  three_conditions_verified: true
+  metric_equivalence_verified: true
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 可用范围为已记录的总相机位姿、源坐标单位；未校准米制，未分离用户头动与人工导航。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.camera_position
+    unity: results/unity_feature_probe.json#features.camera_position
+- name: camera_rotation
+  vrnet_source: v_matrix inverse 3x3 with observed row-vector layout and fixed Z reflection
+    removed
+  vrnet_status: 'yes'
+  unity_source: World-space quaternion; adjustment made to the parent path rig.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改人工导航父级rig四元数，保留头部跟踪子节点
+  unit: quaternion
+  unit_verified: true
+  three_conditions_verified: true
+  metric_equivalence_verified: true
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 可用范围为总相机姿态四元数；未证明人工导航旋转与头动独立，跨引擎坐标须校准。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.camera_rotation
+    unity: results/unity_feature_probe.json#features.camera_rotation
+conditional_features:
+- name: camera_speed
+  vrnet_source: position differences / timestamp differences
+  vrnet_status: conditional
+  unity_source: Finite differences of actually read Transform samples at explicitly
+    prescribed synthetic t=0,.1,.2 seconds. Source units/s, not calibrated meters/s.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改预设路径的位置-时间采样
+  unit: source_coordinate_unit/assumed_second
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 有实际差分样例；时间戳按毫秒解释尚未由exporter证实，米制未知；需处理跳变并分离人工导航。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.camera_speed
+    unity: results/unity_feature_probe.json#features.camera_speed
+  condition: 有实际差分样例；时间戳按毫秒解释尚未由exporter证实，米制未知；需处理跳变并分离人工导航。
+- name: camera_acceleration
+  vrnet_source: vector velocity differences / time; existing v6 field is scalar speed
+    change
+  vrnet_status: conditional
+  unity_source: Difference of scalar speeds / dt. This probe changes the prescribed
+    path speed; vector acceleration must be defined consistently in production.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改预设路径速度变化；当前探针测标量速度差分
+  unit: source_coordinate_unit/assumed_second^2
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 当前v6为abs(delta scalar speed)/dt，不是完整向量加速度；Unity探针也是标量差分；必须统一定义并重新导出。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.camera_acceleration
+    unity: results/unity_feature_probe.json#features.camera_acceleration
+  condition: 当前v6为abs(delta scalar speed)/dt，不是完整向量加速度；Unity探针也是标量差分；必须统一定义并重新导出。
+- name: camera_rotation_rate
+  vrnet_source: geodesic relative quaternion/matrix rotation magnitude / seconds
+  vrnet_status: conditional
+  unity_source: Shortest quaternion geodesic angle/dt, degrees/s; synthetic yaw path.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改人工导航rig的四元数-时间采样
+  unit: degrees/assumed_second
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 可推导四元数最短相对转角/dt；时钟、跳变和旋转采样需确认，不能将任意Euler差分替代。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.camera_rotation_rate
+    unity: results/unity_feature_probe.json#features.camera_rotation_rate
+  condition: 可推导四元数最短相对转角/dt；时钟、跳变和旋转采样需确认，不能将任意Euler差分替代。
+- name: camera_angular_velocity
+  vrnet_source: relative rotation log vector / seconds; body increment frame defined
+    explicitly
+  vrnet_status: conditional
+  unity_source: World-relative quaternion increment expressed as axis-angle vector/dt,
+    degrees/s; coordinate frame explicitly world.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改人工导航rig轴向旋转采样；明确世界/局部坐标系
+  unit: degrees/assumed_second
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 本地probe为body相对旋转log向量；Unity探针为world轴角向量，两边轴坐标需统一；v6只有标量旋转率。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.camera_angular_velocity
+    unity: results/unity_feature_probe.json#features.camera_angular_velocity
+  condition: 本地probe为body相对旋转log向量；Unity探针为world轴角向量，两边轴坐标需统一；v6只有标量旋转率。
+- name: fov
+  vrnet_source: perspective p_matrix diagonal plus off-axis projection terms
+  vrnet_status: conditional
+  unity_source: Vertical FOV of an ordinary perspective camera; horizontal FOV depends
+    on aspect ratio.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 普通透视Camera.fieldOfView；XR显示FOV必须另外检查SDK/每眼投影
+  unit: degrees
+  unit_verified: true
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: p_matrix有非对称偏移；旧v6对角公式只是对称等效FOV。普通Camera垂直FOV可改，但XR每眼投影与设备可见视野未验证。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.fov
+    unity: results/unity_feature_probe.json#features.fov
+  condition: p_matrix有非对称偏移；旧v6对角公式只是对称等效FOV。普通Camera垂直FOV可改，但XR每眼投影与设备可见视野未验证。
+- name: object_count
+  vrnet_source: valid m_matrix/object_name entries within a logged row
+  vrnet_status: conditional
+  unity_source: Total scene GameObjects including camera and rig, not renderer count
+    or visible render events. Addition is verified.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 增删GameObject；若训练目标是渲染对象需统一对象身份、可见性、材质/子网格口径
+  unit: serialized_render_entries_per_logged_row
+  unit_verified: true
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: m_matrix条目数不是GameObject总数、distinct visible objects或空间密度；必须统一renderer/实例/可见性/bounds筛选口径。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.object_count
+    unity: results/unity_feature_probe.json#features.object_count
+  condition: m_matrix条目数不是GameObject总数、distinct visible objects或空间密度；必须统一renderer/实例/可见性/bounds筛选口径。
+- name: object_position
+  vrnet_source: m_matrix row 3, columns 0:3
+  vrnet_status: conditional
+  unity_source: World-space position of a known persistent GameObject.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改持续身份对象的Transform.position
+  unit: source_coordinate_unit
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 单帧模型原点可读，但稳定实例身份、矩阵布局与世界坐标校准未完成；不能宣称跨帧对象轨迹可靠。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.object_position
+    unity: results/unity_feature_probe.json#features.object_position
+  condition: 单帧模型原点可读，但稳定实例身份、矩阵布局与世界坐标校准未完成；不能宣称跨帧对象轨迹可靠。
+- name: object_speed
+  vrnet_source: matched object transform positions / time
+  vrnet_status: conditional
+  unity_source: Finite differences of the same GameObject identity; source units/s.
+    Animator root motion and skinning require separate handling.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改同一对象位置-时间采样；Animator/蒙皮另行处理
+  unit: source_coordinate_unit/assumed_second
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: object_name有重复，不能保证持续实例身份；米制未知，旧速度极值存在匹配错误或跳变可能。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.object_speed
+    unity: results/unity_feature_probe.json#features.object_speed
+  condition: object_name有重复，不能保证持续实例身份；米制未知，旧速度极值存在匹配错误或跳变可能。
+- name: optical_flow
+  vrnet_source: Farneback from actual local RGB video/JPG sequences; no raw flow column
+    found
+  vrnet_status: 'yes'
+  unity_source: Two actual rendered RGB frames from lateral object movement; external
+    Farneback measurement pending; no direct optical-flow parameter.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 间接修改对象或相机运动并重渲染；无直接光流属性
+  unit: pixels/pair_at_fixed_resolution
+  unit_verified: true
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 两端实际RGB均可用Farneback；需要固定分辨率、原生采样dt、参数并重渲染；当前clip重采样与原JPG结果不是同一数值口径。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.optical_flow
+    unity: results/unity_feature_probe.json#features.optical_flow
+  condition: 两端实际RGB均可用Farneback；需要固定分辨率、原生采样dt、参数并重渲染；当前clip重采样与原JPG结果不是同一数值口径。
+unusable_features:
+- name: depth_change_rate
+  vrnet_source: none in local raw CSV headers or auxiliary files
+  vrnet_status: 'no'
+  unity_source: Linear view-space surface depth read at a fixed center pixel; object
+    moved along z. Two samples at prescribed one-second separation give signed delta/dt
+    in source units/s. RGB monocular depth and scene-layout depth have different semantics.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 间接修改已知对象深度/相机路径并重渲染线性深度图
+  unit: unknown
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: 当前VR.net CSV/JPG及只读ZIP目录没有真实深度；RGB亮度/边缘代理不可改名为深度变化率。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.depth_change_rate
+    unity: results/unity_feature_probe.json#features.depth_change_rate
+- name: particle_emission_rate
+  vrnet_source: none in local released CSVs
+  vrnet_status: 'no'
+  unity_source: EmissionModule.rateOverTime constant only; not total particles, bursts,
+    rateOverDistance or rendered density.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 修改ParticleSystem.emission.rateOverTime；bursts/rateOverDistance需另定义
+  unit: unknown
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: Unity rateOverTime实际可读调；当前VR.net未提供此属性，不能从矩阵或RGB反推发射率真值。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.particle_emission_rate
+    unity: results/unity_feature_probe.json#features.particle_emission_rate
+- name: dynamic_light_count
+  vrnet_source: none in local released CSVs
+  vrnet_status: 'no'
+  unity_source: Active enabled realtime Light component count. Realtime lighting is
+    not evidence of temporal animation; animated-light count needs multiple snapshots
+    and an explicit definition.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 增删active enabled realtime Light；动画光源数需另定义
+  unit: unknown
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: Unity active realtime Light实际可增减，但不等于动画灯；VR.net无对应Light属性。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.dynamic_light_count
+    unity: results/unity_feature_probe.json#features.dynamic_light_count
+- name: triangle_count
+  vrnet_source: none in local released CSVs
+  vrnet_status: 'no'
+  unity_source: Triangle topology of one known mesh instance; real-scene totals must
+    include active LOD and skinned meshes and avoid double counting submeshes.
+  unity_actual_read: true
+  unity_adjustable: true
+  adjust_method: 更改已知mesh三角索引；生产环境换LOD/mesh并统计实际实例
+  unit: unknown
+  unit_verified: false
+  three_conditions_verified: false
+  metric_equivalence_verified: false
+  artificial_locomotion_separated: false
+  validated_scope: 仅本机合成Editor场景、普通未跟踪相机；未验证实际XR运行
+  reason: Unity已知Mesh三角索引实际可读调；VR.net模型矩阵/bounds不含拓扑，无法获得三角形真值。
+  evidence:
+    vrnet: results/vrnet_feature_probe.json#features.triangle_count
+    unity: results/unity_feature_probe.json#features.triangle_count

@@ -1,0 +1,185 @@
+# VR 场景晕动症风险因素规则库
+# 版本冻结日期记录为实际核查日；粘贴指令所列 2026-10-02 已过，避免回填日期。
+# evidence_strength: strong / moderate / mixed / unknown
+
+version: "1.0"
+frozen_date: "2026-10-03"
+severity_calibration: "TBD：文献未给出可通用的低/中/高距离分界；检测脚本不虚构严重程度阈值。"
+
+risk_factors:
+  - id: high_optical_flow_speed
+    name: "高视觉平移速度（文献中的虚拟导航速度）"
+    description: "一项实验综述所述的前后向平移速度 3–10 m/s 条件与更强恶心/vection 相关；该速度不是以像素/帧计算的光流幅值。"
+    metric: "virtual_translation_speed_m_s"
+    threshold:
+      condition: "range"
+      low: 3.0
+      high: 10.0
+      unit: "m/s"
+    evidence_strength: "moderate"
+    source:
+      - "Chang, E., Kim, H. T., & Yoo, B. (2020). Virtual Reality Sickness: A Review of Causes and Measurements. International Journal of Human–Computer Interaction, 36(17), 1658–1682. DOI: 10.1080/10447318.2020.1778351"
+    recommendation: "若测得的虚拟平移速度位于该实验条件范围，可评估降低速度、分段移动或提供主动控制；需在目标场景验证。"
+    caveat: "3–10 m/s 是特定前后向导航实验条件，不是通用光流阈值；该实验中不适程度在约 10 m/s 达峰，继续加速后未继续上升。当前特征矩阵是像素位移/采样图像对，不能换算为 m/s。"
+
+  - id: dual_axis_rotation
+    name: "多轴旋转"
+    description: "视觉场景同时包含至少两个旋转轴。"
+    metric: "rotation_axes"
+    threshold:
+      condition: ">="
+      value: 2
+      unit: "axes"
+    evidence_strength: "moderate"
+    source:
+      - "Bonato, F., Bubka, A., & Palmisano, S. (2009). Combined Pitch and Roll and Cybersickness in a Virtual Environment. Aviation, Space, and Environmental Medicine, 80(11), 941–945. DOI: 10.3357/ASEM.2394.2009"
+      - "Keshavarz, B., & Hecht, H. (2011). Axis rotation and visually induced motion sickness: The role of combined roll, pitch, and yaw motion. Aviation, Space, and Environmental Medicine, 82(11), 1023–1029. DOI: 10.3357/ASEM.3078.2011"
+    recommendation: "检查是否能减少不必要的旋转轴组合；避免把三轴判为必然比双轴更危险。"
+    caveat: "实验支持多轴相对单轴更易引起不适，但双轴与三轴之间没有显著差异；必须有场景相机/运动轨迹数据才能检测。"
+
+  - id: oscillation_frequency_high_risk
+    name: "约 0.2–0.3 Hz 的振荡运动"
+    description: "平移振荡运动频率落在约 0.2–0.3 Hz。"
+    metric: "oscillation_frequency_hz"
+    threshold:
+      condition: "range"
+      low: 0.2
+      high: 0.3
+      unit: "Hz"
+    evidence_strength: "moderate"
+    source:
+      - "Golding, J. F., & Gresty, M. A. (2016). Biodynamic Hypothesis for the Frequency Tuning of Motion Sickness. Aerospace Medicine and Human Performance, 87(1), 65–68. DOI: 10.3357/AMHP.4295.2016"
+    recommendation: "若场景包含周期性平移运动，可审查频率并在目标任务中验证替代运动曲线。"
+    caveat: "文献讨论的是运动病的振荡运动/生物动力假说；不能直接推广到任意视觉动画或用单张图像估频。"
+
+  - id: wide_fov_high_speed
+    name: "运动期间的宽视场暴露"
+    description: "文献研究过在虚拟移动期间动态调节视场以缓解不适；用户给出的 FOV >100° 且速度 >5 m/s 组合阈值未找到直接依据。"
+    metric: "combined"
+    threshold:
+      condition: "and"
+      conditions:
+        - metric: "camera_fov_deg"
+          condition: "unknown"
+          value: null
+          unit: "degrees"
+        - metric: "virtual_translation_speed_m_s"
+          condition: "unknown"
+          value: null
+          unit: "m/s"
+    evidence_strength: "unknown"
+    source:
+      - "Fernandes, A. S., & Feiner, S. K. (2016). Combating VR sickness through subtle dynamic field-of-view modification. 2016 IEEE Symposium on 3D User Interfaces. DOI: 10.1109/3DUI.2016.7460053"
+    recommendation: "可把运动响应式、短暂 FOV 缩窄或 vignette 作为需验证的设计选项，同时检查临场感影响。"
+    caveat: "该研究不支持固定的 100°/5 m/s 触发界线，也不验证本规则所写的联合阈值；本条默认不可自动判定。"
+
+  - id: missing_reference_frame
+    name: "缺少稳定视觉参考框架"
+    description: "场景运动期间没有独立静止的视觉背景或稳定参照线索。"
+    metric: "has_reference_frame"
+    threshold:
+      condition: "=="
+      value: false
+    evidence_strength: "moderate"
+    source:
+      - "Duh, H. B.-L., Parker, D. E., & Furness, T. A. (2004). An independent visual background reduced simulator sickness in a driving simulator. Presence: Teleoperators and Virtual Environments, 13(5), 578–588. DOI: 10.1162/1054746042545283"
+      - "Wienrich, C., Obremski, D., & Israel, J. H. (2022). Repeated experience or a virtual nose to reduce simulator sickness? Entertainment Computing, 43, 100514. DOI: 10.1016/j.entcom.2022.100514"
+    recommendation: "考虑提供与自运动分离的稳定视觉背景或参照线索；虚拟鼻只能作为需要单独评估的设计选项。"
+    caveat: "独立静止背景研究支持缓解可能性；虚拟鼻研究结果不一致，不能把特定参照物说成稳健通用方案。"
+
+  - id: passive_navigation
+    name: "被动导航／缺少运动控制"
+    description: "用户不能控制产生场景运动的导航或载具。"
+    metric: "controllability"
+    threshold:
+      condition: "=="
+      value: "passive"
+    evidence_strength: "mixed"
+    source:
+      - "Chen, Y.-C., Dong, X., Hagstrom, J., & Stoffregen, T. A. (2011). Control of a virtual ambulation influences body movement and motion sickness. BIO Web of Conferences, 1, 00016. DOI: 10.1051/bioconf/20110100016"
+      - "Dong, X., & Stoffregen, T. A. (2010). Postural Activity and Motion Sickness among Drivers and Passengers in a Console Video Game. Proceedings of the Human Factors and Ergonomics Society Annual Meeting, 54(18), 1340–1344. DOI: 10.1177/154193121005401808"
+      - "Risi, D., & Palmisano, S. (2019). Effects of postural stability, active control, exposure duration and repeated exposures on HMD induced cybersickness. Displays, 60, 9–17. DOI: 10.1016/j.displa.2019.08.003"
+    recommendation: "可考虑给用户更多导航控制权或运动预告；结合目标任务做比较，不作为必然有效的改动。"
+    caveat: "较早的游戏/虚拟行走研究发现控制可能降低不适；HMD 研究未发现 active control 的显著效果，证据存在情境差异。"
+
+  - id: long_duration
+    name: "较长暴露时长提示"
+    description: "预期单次暴露时长超过 10 分钟时提示设计者审查休息安排；10 分钟不是安全/患病分界线。"
+    metric: "expected_duration_min"
+    threshold:
+      condition: ">"
+      value: 10
+      unit: "minutes"
+    evidence_strength: "moderate"
+    source:
+      - "Chang, E., Kim, H. T., & Yoo, B. (2020). Virtual Reality Sickness: A Review of Causes and Measurements. DOI: 10.1080/10447318.2020.1778351"
+      - "Stanney, K. M., Hale, K. S., Nahmens, I., & Kennedy, R. S. (2003). What to expect from immersive virtual environment exposure: influences of gender, body mass index, and past experience. Human Factors, 45(3), 504–520. DOI: 10.1518/hfes.45.3.504.27254"
+    recommendation: "对较长体验考虑提供休息提示、退出选项和暴露时长提示。"
+    caveat: "短于 10 分钟也可能出现症状；时长与症状关系不构成个体诊断或统一上限。"
+
+  - id: high_particle_density
+    name: "粒子发射强度"
+    description: "检查粒子系统数量/发射率；目前未找到可支持 200 particles/s 作为晕动症风险切点的来源。"
+    metric: "particle_emission_rate"
+    threshold:
+      condition: "unknown"
+      value: null
+      unit: "particles/s (unit itself requires scene-tool definition)"
+    evidence_strength: "unknown"
+    source:
+      - "TBD"
+    recommendation: "不自动给出降粒子建议；如作为视觉复杂度/性能问题审查，应由设计者另行验证其与晕动症的关系。"
+    caveat: "200 的切点及粒子密度到晕动症的直接关系未核实。"
+
+  - id: high_dynamic_lights
+    name: "动态光源数量"
+    description: "检查动态光源数量；目前未找到可支持超过 5 个光源作为晕动症风险切点的来源。"
+    metric: "dynamic_light_count"
+    threshold:
+      condition: "unknown"
+      value: null
+      unit: "lights"
+    evidence_strength: "unknown"
+    source:
+      - "TBD"
+    recommendation: "不自动建议删减光源；需要先定义光源计数方式并提供该数量与晕动症的直接文献证据。"
+    caveat: "光源性能成本不等于晕动症风险；数量 5 未经证实。"
+
+  - id: high_peripheral_complexity
+    name: "周边视觉复杂度"
+    description: "探索性指标：周边区域视觉复杂度。已发表预测研究使用视觉复杂度特征，但未验证周边几何复杂度 >0.7 为风险界线。"
+    metric: "peripheral_geometry_complexity"
+    threshold:
+      condition: "unknown"
+      value: null
+      unit: "TBD"
+    evidence_strength: "unknown"
+    source:
+      - "Oh, H. (2020). Predicting the Level of Cybersickness via Spatiotemporal Perceptual Features Extracted from Virtual Reality Content. Journal of the Institute of Electronics and Information Engineers, 57(11), 45–53. DOI: 10.5573/ieie.2020.57.11.45"
+    recommendation: "不自动降低 LOD；只有在能稳定定义周边区域并取得验证证据后再做建议。"
+    caveat: "原研究的视觉复杂度预测特征不等同于周边几何因果风险；0.7 切点未核实。"
+
+  - id: high_depth_change_rate
+    name: "深度变化率"
+    description: "探索性检测物体深度快速变化；已发表预测研究使用深度特征，但未验证深度变化率 >0.5 为晕动症阈值。"
+    metric: "depth_change_rate"
+    threshold:
+      condition: "unknown"
+      value: null
+      unit: "TBD"
+    evidence_strength: "unknown"
+    source:
+      - "Oh, H. (2020). Predicting the Level of Cybersickness via Spatiotemporal Perceptual Features Extracted from Virtual Reality Content. DOI: 10.5573/ieie.2020.57.11.45"
+    recommendation: "不自动改动物体布局；需定义有量纲/无量纲深度变化指标并独立验证。"
+    caveat: "使用深度作为预测输入不证明深度变化是因果因素；0.5 切点无直接依据。"
+
+notes: |
+  - evidence_strength 定义：
+    - strong: 多项直接研究一致支持本条具体因素和可操作判据
+    - moderate: 有直接研究支持因素/判据，但场景适用范围有限
+    - mixed: 直接研究结果或效应在不同实验间不一致
+    - unknown: 未找到支持该具体规则或数值阈值的可靠证据
+  - 规则的数值阈值只有在来源具体支持时才可执行；unknown/TBD 阈值不得触发风险。
+  - 本规则库基于文献，不是数据驱动；不读取或使用晕动症标签。
+  - 工具只检查场景风险因素，不预测晕动症，不代表临床结论。
+  - 规则库和建议未经用户验证；应用场景与测量定义会影响可解释性。

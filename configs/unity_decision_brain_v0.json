@@ -1,0 +1,118 @@
+{
+  "schema_version": "unity-decision-brain-config-1.0",
+  "context_schema_version": "unity-decision-context-1.0",
+  "outcome_schema_version": "unity-decision-outcome-1.0",
+  "allowed_source_kinds": [
+    "rule_bootstrap",
+    "scripted_bootstrap",
+    "public_human",
+    "unity_human"
+  ],
+  "human_source_kinds": [
+    "public_human",
+    "unity_human"
+  ],
+  "skills": [
+    "Navigate",
+    "LookAt",
+    "Observe",
+    "Interact",
+    "Replan",
+    "Stop"
+  ],
+  "brain_states": [
+    "Scan",
+    "Navigate",
+    "LookAt",
+    "Interact",
+    "Observe",
+    "Replan",
+    "Complete",
+    "Unknown"
+  ],
+  "planner_modes": [
+    "unity-navmesh-corner-following",
+    "collision-checked-direct-steering(no-NavMesh)",
+    "unknown"
+  ],
+  "semantic_types": [
+    "risk_candidate",
+    "interaction_point",
+    "runtime-discovered-observation",
+    "runtime-walkable-sample",
+    "landmark",
+    "dynamic",
+    "unknown",
+    "__stop__"
+  ],
+  "global_numeric_features": [
+    "simulated_time",
+    "coverage",
+    "replans"
+  ],
+  "candidate_numeric_features": [
+    "priority",
+    "relative_x",
+    "relative_y",
+    "relative_z",
+    "distance",
+    "bearing_sin",
+    "bearing_cos",
+    "cooldown_seconds"
+  ],
+  "candidate_boolean_features": [
+    "resolved",
+    "reachability_known",
+    "reachable",
+    "visibility_known",
+    "visible",
+    "navmesh_projected",
+    "visited",
+    "interaction_declared",
+    "interaction_available",
+    "interaction_required",
+    "interaction_attempted",
+    "interaction_verified",
+    "risk_candidate"
+  ],
+  "append_stop_candidate": true,
+  "split": {
+    "train_fraction": 0.7,
+    "validation_fraction": 0.15,
+    "test_fraction": 0.15,
+    "seed": 42,
+    "group_definition": "projectFamily + sceneFamily; fallback projectId + sceneName"
+  },
+  "minimum_production_samples": 200,
+  "minimum_production_groups": 6,
+  "source_weights": {
+    "rule_bootstrap": 0.25,
+    "scripted_bootstrap": 0.25,
+    "public_human": 1.0,
+    "unity_human": 1.0
+  },
+  "model": {
+    "global_hidden_dim": 32,
+    "candidate_hidden_dim": 48,
+    "joint_hidden_dim": 64,
+    "dropout": 0.05
+  },
+  "training": {
+    "epochs": 80,
+    "patience": 10,
+    "min_delta": 0.0001,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "weight_decay": 0.00001,
+    "skill_loss_weight": 0.35,
+    "gradient_clip_norm": 5.0,
+    "seed": 42
+  },
+  "claims": {
+    "model_name": "Unity Decision Brain v0",
+    "scope": "candidate target ranking and macro-skill prediction",
+    "human_like_claim_allowed": false,
+    "rule_bootstrap_is_human_data": false,
+    "risk_score_is_a_decision_label": false
+  }
+}

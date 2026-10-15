@@ -1,0 +1,10 @@
+# CPU/data/head dependencies for the frozen TSM rating pilot.
+# Install torch==2.5.1 and torchvision==0.20.1 separately from the selected
+# official CUDA wheel index. Do not copy the Windows .venv to Linux.
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.14.1
+scikit-learn==1.5.2
+joblib==1.4.2
+Pillow==10.4.0
+tqdm==4.66.5

@@ -1,0 +1,27 @@
+name: Source checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lightweight-tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install lightweight test dependency
+        run: python -m pip install PyYAML==6.0.2
+      - name: Check public package boundaries and hashes
+        run: python scripts/check_release_package.py
+      - name: Run data-free source tests
+        shell: pwsh
+        run: |
+          python -m unittest `
+            scripts.test_unity_parser `
+            scripts.test_compile_scene_agent_contract `
+            scripts.test_generic_scene_agent_collision `
+            scripts.test_generic_scene_agent_interaction_lock `
+            scripts.test_scene_agent_terminal_acceptance -v

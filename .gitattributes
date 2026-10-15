@@ -1,0 +1,35 @@
+* text=auto
+
+*.cs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.ps1 text eol=lf
+*.shader text eol=lf
+*.sh text eol=lf
+*.unity text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+
+# Generated Unity runtime exports have byte-level integrity hashes. Preserve
+# their exact serialized bytes instead of normalizing line endings.
+demo/UnityNormalHmdAgentDemo/Assets/Resources/NormalHmdAgentModel.json -text
+demo/UnityRandomAgentDemo/Assets/Resources/EyeNavAgentModel.json -text
+models/unity_decision_brain_v0_unity.json -text
+demo/UnityNormalHmdAgentDemo/Assets/Resources/NormalHmdAgentModel.json whitespace=-blank-at-eol
+demo/UnityRandomAgentDemo/Assets/Resources/EyeNavAgentModel.json whitespace=-blank-at-eol
+models/unity_decision_brain_v0_unity.json whitespace=-blank-at-eol
+
+# Markdown uses two-space hard breaks, and Unity serializes empty YAML values
+# with a trailing space. Do not report those generated/source conventions as
+# patch whitespace errors.
+*.md whitespace=-blank-at-eol
+*.meta whitespace=-blank-at-eol
+*.asset whitespace=-blank-at-eol
+*.unity whitespace=-blank-at-eol
+*.py whitespace=-blank-at-eof
+
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.png binary
