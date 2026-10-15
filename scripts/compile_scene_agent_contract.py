@@ -687,6 +687,11 @@ def collect_llm_source_documents(
     max_total_chars: int = 220_000,
 ) -> list[dict[str, Any]]:
     """Read a bounded, hashed source bundle that is passed verbatim to the LLM."""
+    # Resolve once and use the canonical spelling consistently. GitHub's Windows
+    # runner can expose the same temporary directory as both ``RUNNER~1`` and
+    # ``runneradmin``; mixing those spellings makes Path.relative_to fail even
+    # though both paths identify the same directory.
+    project_root = project.resolve()
     suggested_files: list[str] = [contract["runtime_scene"]["path"]]
     suggested_keys = {suggested_files[0].replace("\\", "/").casefold()}
 
@@ -712,20 +717,20 @@ def collect_llm_source_documents(
     # sources after direct evidence, still subject to the caller's strict file and
     # character caps. This lets the LLM inspect controller/model collaborators
     # without claiming that a missing YAML reference means the source is absent.
-    assets_root = (project / "Assets").resolve()
-    if is_within(assets_root, project) and assets_root.is_dir():
+    assets_root = (project_root / "Assets").resolve()
+    if is_within(assets_root, project_root) and assets_root.is_dir():
         other_scripts = sorted(
             (
                 path
                 for path in assets_root.rglob("*")
                 if path.is_file()
                 and path.suffix.casefold() == ".cs"
-                and is_within(path.resolve(), project)
+                and is_within(path.resolve(), project_root)
             ),
-            key=lambda path: path.relative_to(project).as_posix().casefold(),
+            key=lambda path: path.resolve().relative_to(project_root).as_posix().casefold(),
         )
         for script in other_scripts:
-            suggest(script.relative_to(project).as_posix())
+            suggest(script.resolve().relative_to(project_root).as_posix())
 
     for conventional in (
         "Packages/manifest.json",
@@ -744,8 +749,8 @@ def collect_llm_source_documents(
             relative = normalized_relative(candidate)
         except ContractError:
             continue
-        absolute = (project / Path(relative)).resolve()
-        if not is_within(absolute, project) or not absolute.is_file():
+        absolute = (project_root / Path(relative)).resolve()
+        if not is_within(absolute, project_root) or not absolute.is_file():
             continue
         content = absolute.read_text(encoding="utf-8-sig", errors="replace")
         limit = min(max_chars_per_file, remaining)
